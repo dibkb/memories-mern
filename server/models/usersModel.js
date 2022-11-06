@@ -45,4 +45,15 @@ userDataSchema.statics.signup = async function (
   });
   return user;
 };
+userDataSchema.statics.login = async function (email, password) {
+  const user = await this.findOne({ email });
+  if (!user) {
+    throw Error("Incorrect email address");
+  }
+  const match = await bcrypt.compare(password, user.password);
+  if (!match) {
+    throw Error("Incorrect password");
+  }
+  return user;
+};
 export const UsersModel = mongoose.model("UsersModel", userDataSchema);
