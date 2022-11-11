@@ -1,6 +1,11 @@
 import React from "react";
-const App = () => {
-  return <div className=""></div>;
+import Home from "./pages/Home";
+const App: React.FC = () => {
+  return (
+    <>
+      <Home />
+    </>
+  );
 };
 
 export default App;

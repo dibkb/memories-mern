@@ -1,0 +1,48 @@
+$LOGO-font: "Goldman", cursive;
+$inter-font: "Inter", sans-serif;
+// mixins
+@mixin title {
+  font-family: $LOGO-font;
+  font-weight: 700;
+  font-size: 3rem;
+}
+@mixin heading {
+  font-family: $LOGO-font;
+  font-weight: 500;
+  font-size: 1.125rem;
+}
+@mixin text {
+  font-family: $LOGO-font;
+  font-weight: 400;
+  font-size: 1rem;
+}
+@mixin text-md {
+  font-family: $LOGO-font;
+  font-weight: 500;
+  font-size: 1rem;
+}
+@mixin body {
+  font-family: $LOGO-font;
+  font-weight: 400;
+  font-size: 0.875rem;
+}
+@mixin body-secondary {
+  font-family: $LOGO-font;
+  font-weight: 400;
+  font-size: 0.8125rem;
+}
+@mixin caption {
+  font-family: $LOGO-font;
+  font-weight: 400;
+  font-size: 0.75rem;
+}
+@mixin caption-medium {
+  font-family: $LOGO-font;
+  font-weight: 500;
+  font-size: 0.75rem;
+}
+@mixin caption-secondary {
+  font-family: $LOGO-font;
+  font-weight: 400;
+  font-size: 0.625rem;
+}
