@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "../styles/Utils.module.scss";
-const Logo: React.FC<LogoProp> = ({ large, color }) => {
+const Logo: React.FC<LogoProp> = ({ large, color }) =>
+{
   const fontSize = large ? "3rem" : "1rem";
   return (
     <main
@@ -12,7 +13,8 @@ const Logo: React.FC<LogoProp> = ({ large, color }) => {
   );
 };
 export default Logo;
-interface LogoProp {
+interface LogoProp
+{
   large?: boolean;
   color?: string;
 }

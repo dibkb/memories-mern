@@ -1,9 +1,6 @@
-@import "colors";
-@import "fonts";
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+@import "wrapper";
 .logo {
-  @apply font-family: $LOGO-font;
-  letter-spacing: 1.02em;
+  @apply min-w-max flex justify-center items-center;
+  font-family: $LOGO-font;
+  letter-spacing: 1.45em;
 }

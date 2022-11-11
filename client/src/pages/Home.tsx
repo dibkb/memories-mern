@@ -4,14 +4,15 @@ import styles from "../styles/Home.module.scss";
 import { colors } from "../utils/colors";
 const Home: React.FC = () => {
   return (
-    <body className="container mx-auto">
-      <Logo large={true} color={colors.neon} />
-      <p className={styles["subtitle"]}>
-        Create beautiful memories and share with the world
-      </p>
-      <button className={styles["btn"]}>Start here</button>
+    <body className={styles["home-container"]}>
+      <section className={styles["section"]}>
+        <Logo large={true} color={colors.neon} />
+        <p className={styles["subtitle"]}>
+          Create beautiful memories and share with the world
+        </p>
+        <button className={styles["button"]}>Start here</button>
+      </section>
     </body>
   );
 };
-
 export default Home;
