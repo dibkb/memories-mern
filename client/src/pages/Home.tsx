@@ -4,7 +4,7 @@ import styles from "../styles/Home.module.scss";
 import { colors } from "../utils/colors";
 const Home: React.FC = () => {
   return (
-    <body className={["container mx-auto", styles["logo"]].join()}>
+    <body className="container mx-auto">
       <Logo large={true} color={colors.neon} />
       <p className={styles["subtitle"]}>
         Create beautiful memories and share with the world

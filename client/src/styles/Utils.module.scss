@@ -1,6 +1,9 @@
 @import "colors";
 @import "fonts";
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 .logo {
-  font-family: $LOGO-font;
+  @apply font-family: $LOGO-font;
   letter-spacing: 1.02em;
 }
