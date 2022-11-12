@@ -7,7 +7,6 @@ import {
   EyeSlashIcon,
 } from "@heroicons/react/24/solid";
 import { TogleOff, TogleOn } from "../../utils/Icons";
-import CreateAccount from "../CreateAccount";
 import { Link } from "react-router-dom";
 const RegisterForm: React.FC = () => {
   const [showPw, setShowPw] = useState<boolean>(false);
