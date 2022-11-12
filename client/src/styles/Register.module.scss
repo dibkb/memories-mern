@@ -12,7 +12,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     display: flex;
-    section {
+    & > * {
       flex-basis: 0;
       flex-grow: 1;
     }

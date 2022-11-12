@@ -1,0 +1,94 @@
+@import "wrapper";
+.__form {
+  padding: 1rem 8rem;
+  display: flex;
+  flex-direction: column;
+  row-gap: 2rem;
+  //   border: 1px solid skyblue;
+  .__label {
+    color: $text-dark;
+    @include body-secondary;
+    font-weight: medium;
+  }
+  input {
+    outline: none;
+    background: transparent;
+    border-radius: 4px;
+    border: 1.5px solid $form-border;
+    margin-top: 0.75rem;
+    padding: 0.75rem 1rem;
+    @include text;
+    &:focus {
+      border-color: $text-secondary;
+    }
+  }
+}
+.profile__input {
+  max-width: min-content;
+  @apply mx-auto;
+  .icon__container {
+    position: relative;
+    .user__icon {
+      @apply h-24 w-24 mx-auto;
+      fill: $icon-fill;
+      cursor: pointer;
+      &:hover {
+        fill: $text-dark;
+        .camera__icon {
+          opacity: 0;
+        }
+      }
+    }
+    .camera__icon {
+      @apply w-4 h-4;
+      right: 15%;
+      top: 60%;
+      position: absolute;
+      fill: $text-gray;
+      z-index: 2;
+    }
+  }
+
+  p {
+    @include caption-medium;
+    color: $text-dark;
+    white-space: nowrap;
+  }
+}
+// -------------------- name-------------------
+.name {
+  display: flex;
+  justify-content: space-between;
+  column-gap: 3rem;
+  > * {
+    flex-basis: 0;
+    flex-grow: 1;
+  }
+  .__first,
+  .__last {
+    input {
+      width: 100%;
+    }
+  }
+}
+.email,
+.password,
+.confirm__password {
+  input {
+    width: 100%;
+  }
+}
+// ---------------------eyeicon-----------------------
+.input__container {
+  position: relative;
+  //   border: 1px solid red;
+  display: flex;
+}
+.__eyeicon {
+  @apply w-5 h-5;
+  position: absolute;
+  bottom: 25%;
+  right: 1rem;
+  cursor: pointer;
+  fill: $text-dark;
+}

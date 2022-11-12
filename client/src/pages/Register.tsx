@@ -1,4 +1,5 @@
 import React from "react";
+import RegisterForm from "../components/Form Components/RegisterForm";
 import Logo from "../components/Logo";
 import styles from "../styles/Register.module.scss";
 const Register: React.FC = () => {
@@ -17,7 +18,7 @@ const Register: React.FC = () => {
             </p>
           </main>
         </section>
-        <section className={styles["form"]}></section>
+        <RegisterForm />
       </main>
     </div>
   );
