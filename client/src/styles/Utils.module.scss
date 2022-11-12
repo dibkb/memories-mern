@@ -4,6 +4,7 @@
   @apply min-w-max flex justify-center items-center;
   font-family: $LOGO-font;
   letter-spacing: 1.45em;
+  user-select: none;
 }
 // --------------------Create Account---------------------
 .create-account {

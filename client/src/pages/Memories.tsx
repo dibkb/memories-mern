@@ -11,8 +11,8 @@ const Memories: React.FC = () => {
         <Logo large={false} color={colors.logo} />
       </nav>
       <main className={styles["main"]}>
-        {/* <CreateAccount /> */}
-        <AddPost />
+        <CreateAccount />
+        {/* <AddPost /> */}
       </main>
     </body>
   );
