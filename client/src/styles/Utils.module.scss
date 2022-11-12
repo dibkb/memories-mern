@@ -1,6 +1,19 @@
 @import "wrapper";
 .logo {
+  max-width: min-content;
   @apply min-w-max flex justify-center items-center;
   font-family: $LOGO-font;
   letter-spacing: 1.45em;
+}
+// --------------------Create Account---------------------
+.create-account {
+  max-width: min-content;
+  border: 1px solid red;
+  @apply flex-col items-center justify-center;
+  button {
+    border: 1px solid red;
+  }
+  pre {
+    @apply flex;
+  }
 }
