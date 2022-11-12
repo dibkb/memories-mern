@@ -4,10 +4,10 @@ const CreateAccount: React.FC = () => {
   return (
     <div className={styles["create-account"]}>
       <button>Create account</button>
-      <pre>
+      <a>
         <p>Already have an account </p>
         <p className={styles["neon"]}>Log In</p>
-      </pre>
+      </a>
     </div>
   );
 };

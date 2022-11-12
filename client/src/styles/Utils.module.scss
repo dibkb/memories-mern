@@ -7,13 +7,36 @@
 }
 // --------------------Create Account---------------------
 .create-account {
-  max-width: min-content;
-  border: 1px solid red;
-  @apply flex-col items-center justify-center;
+  // max-width: min-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   button {
-    border: 1px solid red;
+    @include subtitle-md;
+    background-color: $card-background;
+    border-radius: 9px;
+    padding: 0.75rem 6rem;
   }
-  pre {
+  a {
     @apply flex;
+    margin-top: 1.25rem;
+    @include caption;
+    cursor: pointer;
+    .neon {
+      color: $neon;
+      margin-left: 0.25rem;
+    }
   }
+}
+// --------------------Add Post---------------------
+.add-post {
+  display: flex;
+  justify-content: space-between;
+  background-color: $card-background;
+  border-radius: 0.75rem;
+  width: 600px;
+  padding: 1rem 2rem;
+  @include body;
+  color: $text-dark;
+  user-select: none;
 }

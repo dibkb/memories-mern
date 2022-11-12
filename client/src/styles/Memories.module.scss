@@ -1,4 +1,11 @@
 @import "wrapper";
 .memories-container {
   @apply container mx-auto;
+  .nav {
+    margin: 2rem 0;
+  }
+  .main {
+    display: flex;
+    justify-content: center;
+  }
 }
