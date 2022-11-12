@@ -92,3 +92,53 @@
   cursor: pointer;
   fill: $text-dark;
 }
+.terms {
+  display: flex;
+  align-items: center;
+  column-gap: 0.5rem;
+  // border: 1px solid skyblue;
+  .__text-true,
+  .__text-false {
+    margin-bottom: 0.1rem;
+    @include caption-medium;
+    color: $text-gray;
+    cursor: pointer;
+    &:hover {
+      color: $text-secondary;
+      text-decoration: underline;
+    }
+  }
+  .__text-true {
+    color: $text-secondary;
+  }
+}
+// ---------------------- Button---------------------
+.create__btn__true,
+.create__btn__false {
+  @apply mx-auto;
+  width: 16rem;
+  padding: 1rem 0;
+  border-radius: 9px;
+  color: #fff;
+  @include body;
+}
+.create__btn__true {
+  background-color: #fff;
+  color: $background;
+  font-weight: 500;
+  box-shadow: 1px 4px 45px rgba(238, 238, 238, 0.45);
+}
+.create__btn__false {
+  opacity: 27%;
+  background-color: $card-background;
+}
+// =------------------Login---------------------
+.__login {
+  @apply flex;
+  @include caption;
+  cursor: pointer;
+  .neon {
+    color: $neon;
+    margin-left: 0.25rem;
+  }
+}
