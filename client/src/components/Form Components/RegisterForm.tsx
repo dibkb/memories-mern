@@ -5,7 +5,12 @@ import { TextInput } from "../formInputs/TextInput";
 import { PasswordInput } from "../formInputs/PasswordInput";
 import { Terms } from "./Terms";
 import { CreateAccount, ProfilePicture } from "./components";
-import { lengthTest, alphabetTest } from "../../utils/formValidation";
+import {
+  lengthTest,
+  alphabetTest,
+  emailTest,
+  emailExists,
+} from "../../utils/formValidation";
 const haveAnAccount = (
   <Link to="/login" className="mx-auto">
     <a className={styles["__login"]}>
@@ -34,6 +39,7 @@ const RegisterForm: React.FC = () => {
   const [confirmPassword, SetConfirmPassword] = useState<string>("");
   const [acceptTerms, setAcceptterms] = useState<boolean>(false);
   const [isValidated, setIsValidated] = useState<boolean>(false);
+  // ------------------- Firstname validation------------------------
   useEffect(() => {
     if (firstName !== "") {
       if (!alphabetTest(firstName)) {
@@ -54,6 +60,51 @@ const RegisterForm: React.FC = () => {
       }
     }
   }, [firstName]);
+  // ------------------- Lastname validation------------------------
+  useEffect(() => {
+    if (lastName !== "") {
+      if (!alphabetTest(lastName)) {
+        setLastNameError({
+          error: true,
+          message: "Last name can only be alphabets",
+        });
+      } else if (lastName.length < 1) {
+        setLastNameError({
+          error: true,
+          message: "Last name should not be empty",
+        });
+      } else {
+        setLastNameError({
+          error: false,
+          message: null,
+        });
+      }
+    }
+  }, [lastName]);
+  // ------------------- Email validation------------------------
+  useEffect(() => {
+    if (email !== "") {
+      console.log(emailExists(email));
+      if (!emailTest(email)) {
+        setEmailError({
+          error: true,
+          message: "This is not a valid email",
+        });
+      } else if (emailExists(email)) {
+        setEmailError({
+          error: true,
+          message: "This email is already in use",
+        });
+      }
+      // else if (emailTest(email) && !emailExists(email))
+      // {
+      //   setEmailError({
+      //     error: false,
+      //     message: null,
+      //   });
+      // }
+    }
+  }, [email]);
   return (
     <section className={styles["__form"]}>
       {/* Profile Picture */}
