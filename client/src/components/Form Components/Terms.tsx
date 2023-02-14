@@ -3,13 +3,13 @@ import styles from "../../styles/Form.module.scss";
 import { TogleOff, TogleOn } from "../../utils/Icons";
 export const Terms: React.FC<Terms> = ({ acceptTerms, handleAcceptTerms }) => {
   return (
-    <div
-      className={styles["terms"]}
-      onClick={() => {
-        handleAcceptTerms((prev: boolean) => !prev);
-      }}
-    >
-      <span className={styles["__switchContainer"]}>
+    <div className={styles["terms"]}>
+      <span
+        className={styles["__switchContainer"]}
+        onClick={() => {
+          handleAcceptTerms((prev: boolean) => !prev);
+        }}
+      >
         {acceptTerms && <TogleOn />}
         {!acceptTerms && <TogleOff />}
       </span>

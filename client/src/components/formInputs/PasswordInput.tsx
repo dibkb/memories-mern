@@ -1,13 +1,25 @@
 import React, { useState } from "react";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid";
 import styles from "../../styles/Form.module.scss";
-export const PasswordInput: React.FC<PasswordInput> = ({ placeholder }) => {
+export const PasswordInput: React.FC<PasswordInput> = ({
+  placeholder,
+  input,
+  setInput,
+}) => {
   const [showPw, setShowPw] = useState<boolean>(false);
+  const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault;
+    setInput(e.target.value);
+  };
   return (
     <div className={styles["password"]}>
       <pre className={styles["__label"]}>{placeholder}</pre>
       <div className={styles["input__container"]}>
-        <input type={showPw ? "text" : "password"} />
+        <input
+          type={showPw ? "text" : "password"}
+          value={input}
+          onChange={onChangeHandler}
+        />
         <span
           className={styles["__eyeicon__container"]}
           onClick={() => setShowPw((prev) => !prev)}
@@ -21,4 +33,6 @@ export const PasswordInput: React.FC<PasswordInput> = ({ placeholder }) => {
 };
 interface PasswordInput {
   placeholder: string;
+  input: string;
+  setInput: (value: any) => void;
 }

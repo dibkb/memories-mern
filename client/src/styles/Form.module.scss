@@ -10,7 +10,8 @@
     @include body-secondary;
     font-weight: medium;
   }
-  input {
+  input,
+  .input__true {
     outline: none;
     background: transparent;
     border-radius: 4px;
@@ -21,6 +22,25 @@
     @include text;
     &:focus {
       border-color: $text-secondary;
+    }
+  }
+  .input__true {
+    border-color: $form-warning;
+    &:focus {
+      border-color: $form-warning;
+    }
+  }
+  .warning__container {
+    display: flex;
+    column-gap: 0.5rem;
+    margin-top: 0.5rem;
+    align-items: center;
+    justify-content: flex-end;
+    // border: 1px solid red;
+    .form__warning {
+      @include caption;
+      font-style: normal;
+      color: $form-warning;
     }
   }
 }
