@@ -28,3 +28,13 @@ export const signupUser = async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 };
+
+export const validateEmail = async (req, res) => {
+  const { email } = req.body;
+  try {
+    const emailExists = await UsersModel.validateEmail(email);
+    res.status(200).json({ emailExists });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};

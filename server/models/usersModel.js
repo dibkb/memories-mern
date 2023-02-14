@@ -56,4 +56,13 @@ userDataSchema.statics.login = async function (email, password) {
   }
   return user;
 };
+// -----------------Validations------------------
+userDataSchema.statics.validateEmail = async function (email) {
+  const exist = await this.findOne({ email: email });
+  if (exist) {
+    throw Error("Email already in use");
+  } else {
+    return false;
+  }
+};
 export const UsersModel = mongoose.model("UsersModel", userDataSchema);
