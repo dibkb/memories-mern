@@ -4,6 +4,7 @@
   display: flex;
   flex-direction: column;
   row-gap: 2rem;
+  user-select: none;
   .__label {
     color: $text-dark;
     @include body-secondary;
@@ -16,6 +17,7 @@
     border: 1.5px solid $form-border;
     margin-top: 0.75rem;
     padding: 0.75rem 1rem;
+    width: 100%;
     @include text;
     &:focus {
       border-color: $text-secondary;
@@ -63,24 +65,11 @@
     flex-basis: 0;
     flex-grow: 1;
   }
-  .__first,
-  .__last {
-    input {
-      width: 100%;
-    }
-  }
 }
-.email,
-.password,
-.confirm__password {
-  input {
-    width: 100%;
-  }
-}
+
 // ---------------------eyeicon-----------------------
 .input__container {
   position: relative;
-  //   border: 1px solid red;
   display: flex;
 }
 .__eyeicon {
@@ -95,7 +84,6 @@
   display: flex;
   align-items: center;
   column-gap: 0.5rem;
-  // border: 1px solid skyblue;
   .__text-true,
   .__text-false {
     margin-bottom: 0.1rem;
