@@ -20,6 +20,7 @@ const haveAnAccount = (
   </Link>
 );
 const RegisterForm: React.FC = () => {
+  const [profilePicture, setProfilePicture] = useState<any>();
   const [firstName, SetFirstName] = useState<string>("");
   const [firstNameError, setFirstNameError] = useState<TextError>({
     error: false,
@@ -143,7 +144,10 @@ const RegisterForm: React.FC = () => {
   return (
     <section className={styles["__form"]}>
       {/* Profile Picture */}
-      <ProfilePicture />
+      <ProfilePicture
+        profilePicture={profilePicture}
+        setProfilePicture={setProfilePicture}
+      />
       {/* Name*/}
       <div className={styles["name"]}>
         <TextInput

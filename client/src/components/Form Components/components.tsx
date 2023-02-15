@@ -14,16 +14,18 @@ export const CreateAccount: React.FC<CreateAccount> = ({ acceptTerms }) => {
 interface CreateAccount {
   acceptTerms: boolean;
 }
-export const ProfilePicture: React.FC = () => {
+export const ProfilePicture: React.FC<ProfilePicture> = ({
+  profilePicture,
+  setProfilePicture,
+}) => {
   const [image, setImage] = useState<any>();
-  const [preview, setPreview] = useState<any>();
   useEffect(() => {
     if (!image) {
-      setPreview(profile);
+      setProfilePicture(profile);
       return;
     }
     const objectUrl = URL.createObjectURL(image);
-    setPreview(objectUrl);
+    setProfilePicture(objectUrl);
     return () => URL.revokeObjectURL(objectUrl);
   }, [image]);
 
@@ -37,7 +39,7 @@ export const ProfilePicture: React.FC = () => {
   return (
     <div className={styles["profile__input"]}>
       <div className={styles["icon__container"]}>
-        <img src={preview} className={styles["image__preview"]} />
+        <img src={profilePicture} className={styles["image__preview"]} />
         <input
           type="file"
           onChange={imageSelectHandler}
@@ -47,3 +49,7 @@ export const ProfilePicture: React.FC = () => {
     </div>
   );
 };
+interface ProfilePicture {
+  profilePicture: any;
+  setProfilePicture: (value: string) => void;
+}
