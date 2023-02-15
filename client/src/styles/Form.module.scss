@@ -88,26 +88,7 @@
     color: $text-secondary;
   }
 }
-// ---------------------- Button---------------------
-.create__btn__true,
-.create__btn__false {
-  @apply mx-auto;
-  width: 16rem;
-  padding: 1rem 0;
-  border-radius: 9px;
-  color: #fff;
-  @include body;
-}
-.create__btn__true {
-  background-color: #fff;
-  color: $background;
-  font-weight: 500;
-  box-shadow: 1px 4px 45px rgba(238, 238, 238, 0.45);
-}
-.create__btn__false {
-  opacity: 27%;
-  background-color: $card-background;
-}
+
 // =------------------Login---------------------
 .__login {
   @apply flex;

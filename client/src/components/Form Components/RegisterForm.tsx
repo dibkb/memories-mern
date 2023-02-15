@@ -23,27 +23,27 @@ const RegisterForm: React.FC = () => {
   const [profilePicture, setProfilePicture] = useState<any>();
   const [firstName, SetFirstName] = useState<string>("");
   const [firstNameError, setFirstNameError] = useState<TextError>({
-    error: false,
+    error: null,
     message: null,
   });
   const [lastName, SetLastName] = useState<string>("");
   const [lastNameError, setLastNameError] = useState<TextError>({
-    error: false,
+    error: null,
     message: null,
   });
   const [email, SetEmail] = useState<string>("");
   const [emailError, setEmailError] = useState<TextError>({
-    error: false,
+    error: null,
     message: null,
   });
   const [password, SetPassword] = useState<string>("");
   const [confirmPassword, SetConfirmPassword] = useState<string>("");
   const [passwordError, setPasswordError] = useState<TextError>({
-    error: false,
+    error: null,
     message: null,
   });
   const [confirmPasswordError, setConfirmPasswordError] = useState<TextError>({
-    error: false,
+    error: null,
     message: null,
   });
   const [acceptTerms, setAcceptterms] = useState<boolean>(false);
@@ -141,6 +141,28 @@ const RegisterForm: React.FC = () => {
       });
     }
   }, [confirmPassword]);
+  // ------------------- All validated---------------------
+  useEffect(() => {
+    if (
+      firstNameError.error === false &&
+      lastNameError.error === false &&
+      emailError.error === false &&
+      passwordError.error === false &&
+      confirmPasswordError.error === false &&
+      acceptTerms === true
+    ) {
+      setIsValidated(true);
+    } else {
+      setIsValidated(false);
+    }
+  }, [
+    firstNameError,
+    lastNameError,
+    emailError,
+    passwordError,
+    confirmPasswordError,
+    acceptTerms,
+  ]);
   return (
     <section className={styles["__form"]}>
       {/* Profile Picture */}
@@ -187,7 +209,7 @@ const RegisterForm: React.FC = () => {
       {/* Terms & Conditions*/}
       <Terms acceptTerms={acceptTerms} handleAcceptTerms={setAcceptterms} />
       {/* Create button */}
-      <CreateAccount acceptTerms={acceptTerms} />
+      <CreateAccount isValidated={isValidated} />
       {/* Already have an account? */}
       {haveAnAccount}
     </section>
@@ -195,6 +217,6 @@ const RegisterForm: React.FC = () => {
 };
 export default RegisterForm;
 export interface TextError {
-  error: boolean;
+  error: boolean | null;
   message: string | null;
 }
