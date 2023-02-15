@@ -10,18 +10,18 @@
     @include body-secondary;
     font-weight: medium;
   }
-  input,
+  .input__,
   .input__true {
     outline: none;
     background: transparent;
     border-radius: 4px;
-    border: 1.5px solid transparent;
+    border: 1.5px solid $text-secondary;
     margin-top: 0.75rem;
     padding: 0.75rem 1rem;
     width: 100%;
     @include text;
     &:focus {
-      border-color: $text-secondary;
+      border-color: $text-gray;
     }
   }
   .input__true {
@@ -44,38 +44,7 @@
     }
   }
 }
-.profile__input {
-  max-width: min-content;
-  @apply mx-auto;
-  .icon__container {
-    position: relative;
-    .user__icon {
-      @apply h-24 w-24 mx-auto;
-      fill: $icon-fill;
-      cursor: pointer;
-      &:hover {
-        fill: $text-dark;
-        .camera__icon {
-          opacity: 0;
-        }
-      }
-    }
-    .camera__icon {
-      @apply w-4 h-4;
-      right: 15%;
-      top: 60%;
-      position: absolute;
-      fill: $text-gray;
-      z-index: 2;
-    }
-  }
 
-  p {
-    @include caption-medium;
-    color: $text-dark;
-    white-space: nowrap;
-  }
-}
 // -------------------- name-------------------
 .name {
   display: flex;

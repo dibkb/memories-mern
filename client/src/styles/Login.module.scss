@@ -51,13 +51,13 @@
     outline: none;
     background: transparent;
     border-radius: 4px;
-    border: 1.5px solid $form-border;
+    border: 1.5px solid $text-secondary;
     margin-top: 0.75rem;
     padding: 0.75rem 1rem;
     width: 100%;
     @include text;
     &:focus {
-      border-color: $text-secondary;
+      border-color: $text-gray;
     }
   }
 }

@@ -27,7 +27,7 @@ export const TextInput: React.FC<TextInput> = ({
       <input
         type="text"
         value={input}
-        className={styles[`input__${error.error}`]}
+        className={error.error ? styles["input__true"] : styles["input__"]}
         onChange={onChangeHandler}
       />
       <span className={styles["warning__container"]}>

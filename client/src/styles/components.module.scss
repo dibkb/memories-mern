@@ -1,0 +1,31 @@
+@import "wrapper";
+.profile__input {
+  max-width: min-content;
+  @apply mx-auto;
+  .icon__container {
+    position: relative;
+    .image__preview {
+      height: 128px;
+      width: 128px;
+      border-radius: 50%;
+    }
+  }
+
+  p {
+    @include caption-medium;
+    color: $text-dark;
+    white-space: nowrap;
+  }
+  .fileInput::-webkit-file-upload-button {
+    visibility: hidden;
+  }
+  .fileInput::before {
+    content: "Choose Profile picture";
+    @include caption-medium;
+    color: $text-dark;
+    white-space: nowrap;
+    display: inline-block;
+    user-select: none;
+    cursor: pointer;
+  }
+}

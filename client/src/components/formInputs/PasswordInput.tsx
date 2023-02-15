@@ -23,7 +23,7 @@ export const PasswordInput: React.FC<PasswordInput> = ({
           type={showPw ? "text" : "password"}
           value={input}
           onChange={onChangeHandler}
-          className={styles[`input__${error.error}`]}
+          className={error.error ? styles["input__true"] : styles["input__"]}
         />
         <span
           className={styles["__eyeicon__container"]}
