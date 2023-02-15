@@ -9,7 +9,7 @@ import {
   lengthTest,
   alphabetTest,
   emailTest,
-  emailExists,
+  alphaNumericCheck,
 } from "../../utils/formValidation";
 const haveAnAccount = (
   <Link to="/login" className="mx-auto">
@@ -37,6 +37,14 @@ const RegisterForm: React.FC = () => {
   });
   const [password, SetPassword] = useState<string>("");
   const [confirmPassword, SetConfirmPassword] = useState<string>("");
+  const [passwordError, setPasswordError] = useState<TextError>({
+    error: false,
+    message: null,
+  });
+  const [confirmPasswordError, setConfirmPasswordError] = useState<TextError>({
+    error: false,
+    message: null,
+  });
   const [acceptTerms, setAcceptterms] = useState<boolean>(false);
   const [isValidated, setIsValidated] = useState<boolean>(false);
   // ------------------- Firstname validation------------------------
@@ -84,27 +92,54 @@ const RegisterForm: React.FC = () => {
   // ------------------- Email validation------------------------
   useEffect(() => {
     if (email !== "") {
-      console.log(emailExists(email));
       if (!emailTest(email)) {
         setEmailError({
           error: true,
           message: "This is not a valid email",
         });
-      } else if (emailExists(email)) {
+      } else {
         setEmailError({
-          error: true,
-          message: "This email is already in use",
+          error: false,
+          message: null,
         });
       }
-      // else if (emailTest(email) && !emailExists(email))
-      // {
-      //   setEmailError({
-      //     error: false,
-      //     message: null,
-      //   });
-      // }
     }
   }, [email]);
+  // -------------------- Password validation --------------------
+  useEffect(() => {
+    if (password !== "") {
+      if (password.length < 5) {
+        setPasswordError({
+          error: true,
+          message: "Password must be atleast 5 characters long",
+        });
+      } else if (!alphaNumericCheck(password)) {
+        setPasswordError({
+          error: true,
+          message: "Password must contain alphanumeric characters",
+        });
+      } else {
+        setPasswordError({
+          error: false,
+          message: null,
+        });
+      }
+    }
+  }, [password]);
+  // -------------------- Confirm Password validation --------------------
+  useEffect(() => {
+    if (password !== confirmPassword) {
+      setConfirmPasswordError({
+        error: true,
+        message: "Passwords do not match",
+      });
+    } else {
+      setConfirmPasswordError({
+        error: false,
+        message: null,
+      });
+    }
+  }, [confirmPassword]);
   return (
     <section className={styles["__form"]}>
       {/* Profile Picture */}
@@ -136,12 +171,14 @@ const RegisterForm: React.FC = () => {
         placeholder="Password"
         input={password}
         setInput={SetPassword}
+        error={passwordError}
       />
       {/* Confirm-Password*/}
       <PasswordInput
         placeholder="Confirm Password"
         input={confirmPassword}
         setInput={SetConfirmPassword}
+        error={confirmPasswordError}
       />
       {/* Terms & Conditions*/}
       <Terms acceptTerms={acceptTerms} handleAcceptTerms={setAcceptterms} />

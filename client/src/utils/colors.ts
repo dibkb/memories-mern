@@ -7,6 +7,7 @@ export const colors: colors = {
   neon: "#b5ff55",
   red: "#e12719",
   formWarning: "#d9601d",
+  formBorder: "#262629",
   logo: "#D7D7D7",
   // text -colors
   textDark: "#6e6e6f",

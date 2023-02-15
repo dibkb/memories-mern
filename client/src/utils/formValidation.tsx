@@ -10,7 +10,11 @@ export const emailTest = (value: string) => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(value);
 };
-export const emailExists = async (email: string) => {
+export const alphaNumericCheck = (value: string) => {
+  const alphanumericRegex = /^(?=.*[a-zA-Z])(?=.*[0-9])/;
+  return alphanumericRegex.test(value);
+};
+export const checkEmail = async (email: string) => {
   const url = "http://localhost:4000/users/validateemail";
   const response = await fetch(url, {
     method: "POST",
@@ -24,4 +28,12 @@ export const emailExists = async (email: string) => {
   const data = await response.json();
   const result = await data.emailExists;
   return result;
+};
+export const emailExists = (email: string) => {
+  let emailExist;
+  checkEmail(email).then((res) => {
+    emailExist = res;
+    console.log(emailExist);
+  });
+  return emailExist;
 };

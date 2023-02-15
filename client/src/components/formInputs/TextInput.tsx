@@ -1,7 +1,16 @@
 import React from "react";
 import styles from "../../styles/Form.module.scss";
+import { colors } from "../../utils/colors";
 import { WarningIcon } from "../../utils/Icons";
 import { TextError } from "../Form Components/RegisterForm";
+const inputStyles: React.CSSProperties = {
+  outline: "none",
+  background: "transparent",
+  border: `1.5px solid ${colors.formBorder}`,
+  marginTop: "0.75rem",
+  padding: "0.75rem 1rem",
+  width: "100%",
+};
 export const TextInput: React.FC<TextInput> = ({
   placeholder,
   input,
