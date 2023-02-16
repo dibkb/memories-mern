@@ -3,6 +3,21 @@
   @apply container mx-auto;
   .nav {
     margin: 2rem 0;
+    display: flex;
+    justify-content: space-between;
+  }
+  .logout__btn {
+    @include caption;
+    font-weight: 500;
+    font-size: 13px;
+    padding: 0.5rem 1rem;
+    background-color: $card-background;
+    text-transform: uppercase;
+    border-radius: 18px;
+    &:hover {
+      background-color: #fff;
+      color: $form-border;
+    }
   }
   .main {
     display: flex;
