@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
 import styles from "../../styles/components.module.scss";
 import profile from "../../assets/profile.svg";
-export const CreateAccount: React.FC<CreateAccount> = ({ isValidated }) => {
+export const CreateAccount: React.FC<CreateAccount> = ({
+  isValidated,
+  createAcountHandler,
+}) => {
   return (
     <button
       className={styles[`create__btn__${isValidated}`]}
       disabled={!isValidated}
+      onClick={createAcountHandler}
     >
       CREATE ACCOUNT
     </button>
@@ -13,6 +17,7 @@ export const CreateAccount: React.FC<CreateAccount> = ({ isValidated }) => {
 };
 interface CreateAccount {
   isValidated: boolean;
+  createAcountHandler: (e: any) => Promise<void>;
 }
 export const ProfilePicture: React.FC<ProfilePicture> = ({
   profilePicture,

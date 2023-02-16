@@ -8,8 +8,7 @@ import { userRouter } from "./routes/users.js";
 dotenv.config();
 const app = express();
 // middlewares
-app.use(cors());
-app.use(bodyParser.json({ limit: `30mb`, extended: true }));
+app.use(cors({ credentials: true, origin: "http://localhost:5173" }));
 app.use(bodyParser.urlencoded({ limit: `30mb`, extended: true }));
 app.use(express.json());
 // routes

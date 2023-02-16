@@ -129,18 +129,18 @@ const RegisterForm: React.FC = () => {
   }, [password]);
   // -------------------- Confirm Password validation --------------------
   useEffect(() => {
-    if (password !== confirmPassword) {
-      setConfirmPasswordError({
-        error: true,
-        message: "Passwords do not match",
-      });
-    } else {
+    if (password === confirmPassword) {
       setConfirmPasswordError({
         error: false,
         message: null,
       });
+    } else {
+      setConfirmPasswordError({
+        error: true,
+        message: "Passwords do not match",
+      });
     }
-  }, [confirmPassword]);
+  }, [confirmPassword, password]);
   // ------------------- All validated---------------------
   useEffect(() => {
     if (
@@ -163,6 +163,24 @@ const RegisterForm: React.FC = () => {
     confirmPasswordError,
     acceptTerms,
   ]);
+  // ------------------------ CREATE ACCOUNT-------------------
+  const createAcountHandler = async (e: any) => {
+    e.preventDefault();
+    const response = await fetch("http://localhost:4000/users/signup", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email,
+        password,
+        firstName,
+        lastName,
+        image: profilePicture,
+      }),
+      // mode: "no-cors",
+    });
+    const data = await response.json();
+    console.log(data);
+  };
   return (
     <section className={styles["__form"]}>
       {/* Profile Picture */}
@@ -209,7 +227,10 @@ const RegisterForm: React.FC = () => {
       {/* Terms & Conditions*/}
       <Terms acceptTerms={acceptTerms} handleAcceptTerms={setAcceptterms} />
       {/* Create button */}
-      <CreateAccount isValidated={isValidated} />
+      <CreateAccount
+        isValidated={isValidated}
+        createAcountHandler={createAcountHandler}
+      />
       {/* Already have an account? */}
       {haveAnAccount}
     </section>
