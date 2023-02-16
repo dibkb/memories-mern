@@ -65,4 +65,12 @@ userDataSchema.statics.validateEmail = async function (email) {
     return false;
   }
 };
+userDataSchema.statics.getById = async function (_id) {
+  const user = await this.findOne({ _id: _id });
+  if (!user) {
+    throw Error("Id is not valid");
+  }
+  return user;
+};
+
 export const UsersModel = mongoose.model("UsersModel", userDataSchema);

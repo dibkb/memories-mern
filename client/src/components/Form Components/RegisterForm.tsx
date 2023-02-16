@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "../../styles/Form.module.scss";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { TextInput } from "../formInputs/TextInput";
 import { PasswordInput } from "../formInputs/PasswordInput";
 import { Terms } from "./Terms";
@@ -20,6 +20,7 @@ const haveAnAccount = (
   </Link>
 );
 const RegisterForm: React.FC = () => {
+  const [redirect, setRedirect] = useState<boolean>(false);
   const [profilePicture, setProfilePicture] = useState<any>();
   const [firstName, SetFirstName] = useState<string>("");
   const [firstNameError, setFirstNameError] = useState<TextError>({
@@ -166,7 +167,7 @@ const RegisterForm: React.FC = () => {
   // ------------------------ CREATE ACCOUNT-------------------
   const createAcountHandler = async (e: any) => {
     e.preventDefault();
-    const response = await fetch("http://localhost:4000/users/signup", {
+    fetch("http://localhost:4000/users/signup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -176,11 +177,17 @@ const RegisterForm: React.FC = () => {
         lastName,
         image: profilePicture,
       }),
-      // mode: "no-cors",
+    }).then((response) => {
+      if (response.ok) {
+        setRedirect(true);
+      } else {
+        // MOdal warning
+      }
     });
-    const data = await response.json();
-    console.log(data);
   };
+  if (redirect) {
+    return <Navigate to={"/login"} />;
+  }
   return (
     <section className={styles["__form"]}>
       {/* Profile Picture */}
