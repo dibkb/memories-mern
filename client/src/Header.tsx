@@ -33,7 +33,7 @@ const Header: React.FC<Header> = ({ user }) => {
           <>
             <ProfileInfo name={user?.firstName} image={user?.image} />
             <button className={styles["logout__btn"]} onClick={logoutHandler}>
-              Logout
+              Log out
             </button>
           </>
         )}
