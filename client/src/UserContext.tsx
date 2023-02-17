@@ -1,6 +1,6 @@
 import { Children, createContext, useState } from "react";
 
-export const UserContext = createContext<UserContext | null>(null);
+export const UserContext = createContext<UserContext | any>(null);
 export const UserContextProvider: React.FC<UserContextProvider> = ({
   children,
 }) => {

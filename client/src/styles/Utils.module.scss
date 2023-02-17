@@ -17,6 +17,10 @@
     background-color: $card-background;
     border-radius: 9px;
     padding: 0.75rem 6rem;
+    &:hover {
+      background-color: $text-secondary;
+      color: $card-background;
+    }
   }
   a {
     @apply flex;
@@ -40,4 +44,8 @@
   @include body;
   color: $text-dark;
   user-select: none;
+  &:hover {
+    background-color: $text-dark;
+    cursor: pointer;
+  }
 }

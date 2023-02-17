@@ -50,3 +50,10 @@ export const getProfile = async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 };
+export const logoutUser = async (req, res) => {
+  try {
+    res.cookie("token", "").json();
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
