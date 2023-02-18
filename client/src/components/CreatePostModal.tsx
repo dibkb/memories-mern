@@ -7,7 +7,8 @@ export const CreatePostModal: React.FC<CreatePostModal> = ({
 }) => {
   const handleKeyDown = (e: any) => {
     e.target.style.height = "inherit";
-    e.target.style.height = `${e.target.scrollHeight}px`;
+    if (e.target.scrollHeight < 250)
+      e.target.style.height = `${e.target.scrollHeight}px`;
   };
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
@@ -29,7 +30,7 @@ export const CreatePostModal: React.FC<CreatePostModal> = ({
     <div className={styles["modal__overlay"]}>
       <div className={styles["container"]}>
         <div className={styles["button__container"]}>
-          <button className={styles["submit"]}>Submit</button>
+          <button className={styles["submit"]}>Create Post</button>
           <button
             onClick={() => setShowModal(false)}
             className={styles["close"]}
