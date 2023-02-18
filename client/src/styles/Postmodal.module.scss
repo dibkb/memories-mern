@@ -19,13 +19,31 @@
     background-color: $background;
     padding: 1rem 2rem;
     border-radius: 12px;
-    .button {
-      @include caption;
+    .button__container {
       margin-bottom: 1rem;
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+    .submit {
+      width: 75%;
+      padding: 0.5rem;
+      border-radius: 9px;
+      color: #fff;
+      @include body;
+      font-size: 1rem;
+      &:hover {
+        background-color: $neon;
+        color: $card-background;
+      }
+    }
+    .close {
+      width: 25%;
+      @include caption;
       background-color: $card-background;
       max-width: min-content;
       padding: 0.5rem 1rem;
-      align-self: flex-end;
+      // align-self: flex-end;
       border-radius: 9px;
       text-transform: uppercase;
       font-weight: 500;
@@ -82,4 +100,5 @@
 .image__preview {
   border-radius: 9px;
   margin-top: 1rem;
+  max-height: 500px;
 }

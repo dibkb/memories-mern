@@ -23,18 +23,20 @@ export const CreatePostModal: React.FC<CreatePostModal> = ({
         .then((res) => res.blob())
         .then((blob) => (blobURL = URL.createObjectURL(blob)))
         .then((img) => setDisplayPicture(img));
-
     return () => URL.revokeObjectURL(blobURL);
   }, [file]);
   return createPortal(
     <div className={styles["modal__overlay"]}>
       <div className={styles["container"]}>
-        <button
-          onClick={() => setShowModal(false)}
-          className={styles["button"]}
-        >
-          Close
-        </button>
+        <div className={styles["button__container"]}>
+          <button className={styles["submit"]}>Submit</button>
+          <button
+            onClick={() => setShowModal(false)}
+            className={styles["close"]}
+          >
+            Close
+          </button>
+        </div>
         <input
           type="text"
           placeholder="Title"
