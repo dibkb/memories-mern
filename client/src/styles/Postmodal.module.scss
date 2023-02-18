@@ -58,3 +58,28 @@
     }
   }
 }
+.file__input input {
+  width: 100%;
+  background-color: $card-background;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  margin-top: 1rem;
+  border: 0.6px dashed #6e6e6f;
+}
+.file__input input::-webkit-file-upload-button {
+  visibility: hidden;
+}
+.file__input input::before {
+  content: "Upload Photo";
+  @include body;
+  font-weight: 500;
+  color: $text-dark;
+  white-space: nowrap;
+  display: inline-block;
+  user-select: none;
+  cursor: pointer;
+}
+.image__preview {
+  border-radius: 9px;
+  margin-top: 1rem;
+}

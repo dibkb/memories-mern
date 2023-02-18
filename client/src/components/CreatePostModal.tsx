@@ -23,6 +23,7 @@ export const CreatePostModal: React.FC<CreatePostModal> = ({
         .then((res) => res.blob())
         .then((blob) => (blobURL = URL.createObjectURL(blob)))
         .then((img) => setDisplayPicture(img));
+
     return () => URL.revokeObjectURL(blobURL);
   }, [file]);
   return createPortal(
@@ -55,7 +56,11 @@ export const CreatePostModal: React.FC<CreatePostModal> = ({
           }
         ></textarea>
         <div className={styles["file__input"]}>
-          <FileBase64 multiple={false} onDone={fileSelectorHandler} />
+          <FileBase64
+            id="fileInput"
+            multiple={false}
+            onDone={fileSelectorHandler}
+          />
         </div>
         <img src={displayPicture} className={styles["image__preview"]} />
       </div>
