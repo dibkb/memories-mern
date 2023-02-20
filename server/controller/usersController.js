@@ -50,6 +50,15 @@ export const getProfile = async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 };
+export const getProfileById = async (req, res) => {
+  const { id } = req.body;
+  try {
+    const user = await UsersModel.getById(id);
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
 export const logoutUser = async (req, res) => {
   try {
     res.cookie("token", "").json();
