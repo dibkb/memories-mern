@@ -18,7 +18,8 @@ const dataSchema = new mongoose.Schema({
   },
   creator: {
     required: true,
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "UsersModel",
   },
   createdAt: {
     type: Date,

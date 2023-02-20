@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import styles from "../styles/Postmodal.module.scss";
-import FileBase64 from "react-file-base64";
+import Resizer from "react-image-file-resizer";
 export const CreatePostModal: React.FC<CreatePostModal> = ({
   setShowModal,
 }) => {
@@ -14,9 +14,6 @@ export const CreatePostModal: React.FC<CreatePostModal> = ({
   const [description, setDescription] = useState<string>("");
   const [file, setFile] = useState<any>(null);
   const [displayPicture, setDisplayPicture] = useState<string>("");
-  const fileSelectorHandler = (base64: any) => {
-    setFile(base64);
-  };
   const [diableButton, setDisableButton] = useState(true);
   const createPostHandler = async () => {
     setDisableButton(true);
@@ -34,7 +31,7 @@ export const CreatePostModal: React.FC<CreatePostModal> = ({
   useEffect(() => {
     let blobURL: string;
     if (file)
-      fetch(file.base64)
+      fetch(file)
         .then((res) => res.blob())
         .then((blob) => (blobURL = URL.createObjectURL(blob)))
         .then((img) => setDisplayPicture(img));
@@ -47,6 +44,30 @@ export const CreatePostModal: React.FC<CreatePostModal> = ({
       setDisableButton(false);
     }
   }, [title, description, file]);
+  const resizeFile = (file: any) =>
+    new Promise((resolve) => {
+      Resizer.imageFileResizer(
+        file,
+        300,
+        300,
+        "PNG",
+        100,
+        0,
+        (uri) => {
+          resolve(uri);
+        },
+        "base64"
+      );
+    });
+  const onFileSelect = async (event: any) => {
+    try {
+      const file = event.target.files[0];
+      const image = await resizeFile(file);
+      setFile(image);
+    } catch (err) {
+      console.error(err);
+    }
+  };
   return createPortal(
     <div className={styles["modal__overlay"]}>
       <div className={styles["container"]}>
@@ -90,11 +111,12 @@ export const CreatePostModal: React.FC<CreatePostModal> = ({
           }
         ></textarea>
         <div className={styles["file__input"]}>
-          <FileBase64
+          {/* <FileBase64
             id="fileInput"
             multiple={false}
             onDone={fileSelectorHandler}
-          />
+          /> */}
+          <input type="file" name="file" onChange={onFileSelect} />
         </div>
         <img src={displayPicture} className={styles["image__preview"]} />
       </div>

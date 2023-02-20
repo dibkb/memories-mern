@@ -18,8 +18,8 @@ export const createPost = async (req, res) => {
     const newPost = new PostMessage({
       title: title,
       message: description,
-      selectedFile: selectedFile.base64,
-      creator: `${user.firstName} ${user.lastName}`,
+      selectedFile: selectedFile,
+      creator: user,
     });
     await newPost.save();
     res.status(201).send("new post created sucessfully");
