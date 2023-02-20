@@ -17,6 +17,15 @@ export const CreatePostModal: React.FC<CreatePostModal> = ({
   const fileSelectorHandler = (base64: any) => {
     setFile(base64);
   };
+  const createPostHandler = async () => {
+    const response = await fetch("http://localhost:4000/posts", {
+      method: "POST",
+      body: JSON.stringify({ title, description, selectedFile: file }),
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+    });
+    console.log(response);
+  };
   useEffect(() => {
     let blobURL: string;
     if (file)
@@ -24,13 +33,14 @@ export const CreatePostModal: React.FC<CreatePostModal> = ({
         .then((res) => res.blob())
         .then((blob) => (blobURL = URL.createObjectURL(blob)))
         .then((img) => setDisplayPicture(img));
-    return () => URL.revokeObjectURL(blobURL);
   }, [file]);
   return createPortal(
     <div className={styles["modal__overlay"]}>
       <div className={styles["container"]}>
         <div className={styles["button__container"]}>
-          <button className={styles["submit"]}>Create Post</button>
+          <button className={styles["submit"]} onClick={createPostHandler}>
+            Create Post
+          </button>
           <button
             onClick={() => setShowModal(false)}
             className={styles["close"]}
@@ -66,6 +76,7 @@ export const CreatePostModal: React.FC<CreatePostModal> = ({
           />
         </div>
         <img src={displayPicture} className={styles["image__preview"]} />
+        <div children></div>
       </div>
     </div>,
     document.body

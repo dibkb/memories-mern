@@ -25,4 +25,18 @@ const dataSchema = new mongoose.Schema({
     default: new Date(),
   },
 });
+dataSchema.statics.createPost = async function (
+  title,
+  message,
+  selectedFile,
+  creator
+) {
+  const post = await this.create({
+    title,
+    message,
+    selectedFile,
+    creator,
+  });
+  return post;
+};
 export const PostMessage = mongoose.model("PostMessage", dataSchema);

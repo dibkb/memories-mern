@@ -10,9 +10,9 @@ dotenv.config();
 const app = express();
 // middlewares
 app.use(cors({ credentials: true, origin: "http://localhost:5173" }));
-app.use(bodyParser.urlencoded({ limit: `30mb`, extended: true }));
+app.use(bodyParser.urlencoded({ limit: `50mb`, extended: true }));
 app.use(cookieParser());
-app.use(express.json());
+app.use(express.json({ limit: "50mb" }));
 // routes
 app.use("/posts", postRouter);
 app.use("/users", userRouter);
