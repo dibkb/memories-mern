@@ -26,13 +26,16 @@
       align-items: center;
       justify-content: space-between;
     }
-    .submit {
+    .submit,
+    .submit__true {
       width: 80%;
       padding: 0.5rem;
       border-radius: 9px;
       color: #fff;
       @include body;
       font-size: 1rem;
+    }
+    .submit {
       &:hover {
         background-color: $neon;
         color: $card-background;

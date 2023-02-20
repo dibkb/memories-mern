@@ -17,14 +17,19 @@ export const CreatePostModal: React.FC<CreatePostModal> = ({
   const fileSelectorHandler = (base64: any) => {
     setFile(base64);
   };
+  const [diableButton, setDisableButton] = useState(true);
   const createPostHandler = async () => {
+    setDisableButton(true);
     const response = await fetch("http://localhost:4000/posts", {
       method: "POST",
       body: JSON.stringify({ title, description, selectedFile: file }),
       headers: { "Content-Type": "application/json" },
       credentials: "include",
     });
-    console.log(response);
+    if (response.ok) {
+      setShowModal(false);
+    }
+    setDisableButton(false);
   };
   useEffect(() => {
     let blobURL: string;
@@ -34,11 +39,27 @@ export const CreatePostModal: React.FC<CreatePostModal> = ({
         .then((blob) => (blobURL = URL.createObjectURL(blob)))
         .then((img) => setDisplayPicture(img));
   }, [file]);
+  // ----------enable disable button-------------------
+  useEffect(() => {
+    if (title === "" || description === "" || file === "") {
+      setDisableButton(true);
+    } else {
+      setDisableButton(false);
+    }
+  }, [title, description, file]);
   return createPortal(
     <div className={styles["modal__overlay"]}>
       <div className={styles["container"]}>
         <div className={styles["button__container"]}>
-          <button className={styles["submit"]} onClick={createPostHandler}>
+          <button
+            disabled={diableButton}
+            className={
+              diableButton
+                ? styles[`submit__${diableButton}`]
+                : styles["submit"]
+            }
+            onClick={createPostHandler}
+          >
             Create Post
           </button>
           <button
@@ -76,7 +97,6 @@ export const CreatePostModal: React.FC<CreatePostModal> = ({
           />
         </div>
         <img src={displayPicture} className={styles["image__preview"]} />
-        <div children></div>
       </div>
     </div>,
     document.body
