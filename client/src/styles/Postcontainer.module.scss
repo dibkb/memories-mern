@@ -4,9 +4,26 @@
   gap: 1.5rem;
   grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
   margin: 2rem 0;
+  user-select: none;
 }
 .post__container {
   height: 300px;
   max-width: 600px;
   border-radius: 9px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+.creator__info {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+.post__title {
+  @include body;
+  font-size: 500;
+  margin: 0.6rem 0;
+}
+.description {
+  @include caption;
 }
