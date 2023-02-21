@@ -38,3 +38,14 @@ export const createPost = async (req, res) => {
     res.status(404).json(error.message);
   }
 };
+export const likePost = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const post = await PostMessage.findById(id);
+    post.likeCount++;
+    await PostMessage.findByIdAndUpdate(id, post);
+    res.status(200).send("Post updated sucessfully");
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+};
