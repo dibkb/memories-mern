@@ -58,12 +58,15 @@ const Memories: React.FC = () => {
   }, [currPage]);
   const pagesNav = totalPagesArray.map((element) => {
     return (
-      <button key={element} onClick={() => setCurrPage(element)}>
+      <button
+        className={element === currPage ? styles["active"] : undefined}
+        key={element}
+        onClick={() => setCurrPage(element)}
+      >
         {element + 1}
       </button>
     );
   });
-
   return (
     <div className={styles["memories-container"]}>
       {context?.userInfo ? <Header user={context?.userInfo} /> : <Header />}
@@ -71,7 +74,9 @@ const Memories: React.FC = () => {
         {context?.userInfo ? <AddPost /> : <CreateAccount />}
       </main>
       <PostsContainer posts={posts} />
-      {status === "successfull" && <div>{pagesNav}</div>}
+      {status === "successfull" && (
+        <div className={styles["pagination__container"]}>{pagesNav}</div>
+      )}
     </div>
   );
 };

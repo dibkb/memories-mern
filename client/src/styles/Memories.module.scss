@@ -24,3 +24,22 @@
     justify-content: center;
   }
 }
+.pagination__container {
+  display: flex;
+  padding: 0 auto;
+  gap: 1rem;
+  button {
+    @include caption;
+    border-radius: 6px;
+    background-color: $card-background;
+    padding: 0.4rem 0.8rem;
+    &:hover {
+      background-color: #fff;
+      color: $card-background;
+    }
+  }
+  .active {
+    background-color: #fff;
+    color: $card-background;
+  }
+}
