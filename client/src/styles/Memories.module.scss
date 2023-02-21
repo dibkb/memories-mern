@@ -28,6 +28,7 @@
   display: flex;
   padding: 0 auto;
   gap: 1rem;
+  margin-bottom: 0.5rem;
   button {
     @include caption;
     border-radius: 6px;

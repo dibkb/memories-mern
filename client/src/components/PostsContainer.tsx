@@ -2,7 +2,6 @@ import React from "react";
 // ------------styles-----------------
 import styles from "../styles/Postcontainer.module.scss";
 import { colors } from "../utils/colors";
-import { LikeOutline } from "../utils/Icons";
 import { LikeCount } from "./LikeCount";
 const PostsContainer: React.FC<PostsContainer> = ({ posts }) => {
   const content = posts.map((post: any) => {

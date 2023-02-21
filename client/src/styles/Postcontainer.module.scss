@@ -13,6 +13,16 @@
   padding: 1rem;
   display: flex;
   flex-direction: column;
+  transition: 0.3s;
+  &:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+    .creator__name,
+    .description,
+    .post__title {
+      visibility: visible;
+    }
+  }
 }
 .creator__info {
   display: flex;
@@ -23,9 +33,14 @@
   @include body;
   font-size: 500;
   margin: 0.6rem 0;
+  visibility: hidden;
 }
 .description {
   @include caption;
+  visibility: hidden;
+}
+.creator__name {
+  visibility: hidden;
 }
 .like__count {
   margin-top: auto;
@@ -34,4 +49,5 @@
   display: flex;
   gap: 0.4rem;
   cursor: pointer;
+  width: fit-content;
 }
