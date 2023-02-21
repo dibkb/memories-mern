@@ -13,6 +13,7 @@ import {
   getTotalPages,
 } from "../features/posts/postSlice.js";
 import PostsContainer from "../components/PostsContainer";
+import Skeleton from "../components/Skeleton";
 const Memories: React.FC = () => {
   const [currPage, setCurrPage] = useState<number>(0);
   const context = useContext(UserContext);
@@ -73,7 +74,8 @@ const Memories: React.FC = () => {
       <main className={styles["main"]}>
         {context?.userInfo ? <AddPost /> : <CreateAccount />}
       </main>
-      <PostsContainer posts={posts} />
+      {status === "loading" && <Skeleton />}
+      {status === "successfull" && <PostsContainer posts={posts} />}
       {status === "successfull" && (
         <div className={styles["pagination__container"]}>{pagesNav}</div>
       )}
