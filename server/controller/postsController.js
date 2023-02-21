@@ -3,7 +3,7 @@ import { UsersModel } from "../models/usersModel.js";
 import { PostMessage } from "../models/postMessage.js";
 export const getPosts = async (req, res) => {
   try {
-    const postMessages = await PostMessage.find();
+    const postMessages = await PostMessage.find().sort({ _id: -1 });
     res.status(200).json(postMessages);
   } catch (error) {
     res.status(404).json(error.message);
@@ -12,7 +12,6 @@ export const getPosts = async (req, res) => {
 export const createPost = async (req, res) => {
   const { title, description, selectedFile } = req.body;
   const { token } = req.cookies;
-  console.log("createPost");
   try {
     const userInfo = jwt.verify(token, process.env.JWT_KEY);
     const user = await UsersModel.getById(userInfo._id);

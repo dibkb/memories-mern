@@ -11,7 +11,6 @@ export const CreatePostModal: React.FC<CreatePostModal> = ({
     if (e.target.scrollHeight < 250)
       e.target.style.height = `${e.target.scrollHeight}px`;
   };
-  const [redirect, setRedirect] = useState<boolean>(false);
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [file, setFile] = useState<any>(null);
@@ -27,7 +26,7 @@ export const CreatePostModal: React.FC<CreatePostModal> = ({
     });
     if (response.ok) {
       setShowModal(false);
-      setRedirect(true);
+      window.location.reload();
     }
     setDisableButton(false);
   };
@@ -71,9 +70,6 @@ export const CreatePostModal: React.FC<CreatePostModal> = ({
       console.error(err);
     }
   };
-  if (redirect) {
-    return <Navigate to={"/memories"} />;
-  }
   return createPortal(
     <div className={styles["modal__overlay"]}>
       <div className={styles["container"]}>
