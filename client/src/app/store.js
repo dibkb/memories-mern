@@ -5,4 +5,3 @@ export const store = configureStore({
     posts: postReducer,
   },
 });
-console.log(store);

@@ -27,3 +27,11 @@
 .description {
   @include caption;
 }
+.like__count {
+  margin-top: auto;
+  @include caption;
+  justify-self: flex-end;
+  display: flex;
+  gap: 0.4rem;
+  cursor: pointer;
+}
