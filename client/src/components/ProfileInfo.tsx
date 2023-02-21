@@ -23,6 +23,8 @@ const ProfileInfo: React.FC<ProfileInfo> = ({ name, image }) => {
         style={{
           fontSize: "16px",
           color: colors.textSsecondary,
+          fontFamily: "Inter, sans-serif",
+          cursor: "pointer",
         }}
       >
         {name}

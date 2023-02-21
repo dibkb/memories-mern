@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import styles from "../styles/Postmodal.module.scss";
 import Resizer from "react-image-file-resizer";
-import { Navigate } from "react-router-dom";
 export const CreatePostModal: React.FC<CreatePostModal> = ({
   setShowModal,
 }) => {
@@ -113,11 +112,6 @@ export const CreatePostModal: React.FC<CreatePostModal> = ({
           }
         ></textarea>
         <div className={styles["file__input"]}>
-          {/* <FileBase64
-            id="fileInput"
-            multiple={false}
-            onDone={fileSelectorHandler}
-          /> */}
           <input type="file" name="file" onChange={onFileSelect} />
         </div>
         <img src={displayPicture} className={styles["image__preview"]} />

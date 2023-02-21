@@ -31,6 +31,7 @@ const PostsContainer: React.FC<PostsContainer> = ({ posts }) => {
             style={{
               fontSize: "16px",
               color: colors.textSsecondary,
+              fontFamily: "Inter, sans-serif",
             }}
             className={styles["creator__name"]}
           >

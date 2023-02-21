@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "../../styles/components.module.scss";
 import profile from "../../assets/profile.svg";
+import Resizer from "react-image-file-resizer";
 export const CreateAccount: React.FC<CreateAccount> = ({
   isValidated,
   createAcountHandler,
@@ -19,27 +20,37 @@ interface CreateAccount {
   isValidated: boolean;
   createAcountHandler: (e: any) => Promise<void>;
 }
+// --------------------- PROFILE PICTURE-----------------------------------------------
 export const ProfilePicture: React.FC<ProfilePicture> = ({
   profilePicture,
   setProfilePicture,
 }) => {
-  const [image, setImage] = useState<any>();
+  const resizeFile = (file: any) =>
+    new Promise((resolve) => {
+      Resizer.imageFileResizer(
+        file,
+        100,
+        100,
+        "PNG",
+        100,
+        0,
+        (uri) => {
+          resolve(uri);
+        },
+        "base64"
+      );
+    });
   useEffect(() => {
-    if (!image) {
-      setProfilePicture(profile);
-      return;
+    setProfilePicture(profile);
+  }, []);
+  const imageSelectHandler = async (e: any) => {
+    try {
+      const file = e.target.files[0];
+      const image = await resizeFile(file);
+      setProfilePicture(image);
+    } catch (err) {
+      console.error(err);
     }
-    const objectUrl = URL.createObjectURL(image);
-    setProfilePicture(objectUrl);
-    return () => URL.revokeObjectURL(objectUrl);
-  }, [image]);
-
-  const imageSelectHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!e.target.files || e.target.files.length === 0) {
-      setImage(undefined);
-      return;
-    }
-    setImage(e.target.files[0]);
   };
   return (
     <div className={styles["profile__input"]}>
