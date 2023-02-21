@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 export const fetchPosts = createAsyncThunk(
   "posts/fetchPosts",
-  async (pageNo) => {
+  async (pageNo = 0) => {
     const POST_URL = `http://localhost:4000/posts?page=${pageNo}`;
     const response = await axios.get(POST_URL);
     return response.data;
@@ -10,6 +10,7 @@ export const fetchPosts = createAsyncThunk(
 );
 const initialState = {
   posts: [],
+  totalPages: null,
   // idle | loading | successfull | failed
   status: "idle",
   error: null,
@@ -24,7 +25,8 @@ const postSlice = createSlice({
     });
     builder.addCase(fetchPosts.fulfilled, (state, action) => {
       state.status = "successfull";
-      state.posts = action.payload;
+      state.posts = action.payload.posts;
+      state.totalPages = action.payload.totalPages;
     });
     builder.addCase(fetchPosts.rejected, (state, action) => {
       state.status = "failed";

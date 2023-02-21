@@ -40,7 +40,7 @@ const Memories: React.FC = () => {
   }, []);
   useEffect(() => {
     if (status === "idle") {
-      dispatch(fetchPosts(1));
+      dispatch(fetchPosts());
     }
   }, [status, dispatch]);
   return (
