@@ -19,7 +19,7 @@ const Memories: React.FC = () => {
   const dispatch = useDispatch();
   const posts = useSelector(getAllPosts);
   const status = useSelector(getPostStatus);
-  const totalPages = useSelector(getTotalPages);
+  const totalPages: number = useSelector(getTotalPages);
   const error = useSelector(getPostError);
   const fetchProfileInfo = () => {
     fetch("http://localhost:4000/users/profile", {
@@ -46,6 +46,24 @@ const Memories: React.FC = () => {
       dispatch(fetchPosts(0));
     }
   }, [status, dispatch]);
+  const totalPagesArray = Array.apply(null, Array(totalPages)).map(function (
+    x,
+    i
+  ) {
+    return i;
+  });
+  // --------------fetch new page-------------------
+  useEffect(() => {
+    dispatch(fetchPosts(currPage));
+  }, [currPage]);
+  const pagesNav = totalPagesArray.map((element) => {
+    return (
+      <button key={element} onClick={() => setCurrPage(element)}>
+        {element + 1}
+      </button>
+    );
+  });
+
   return (
     <div className={styles["memories-container"]}>
       {context?.userInfo ? <Header user={context?.userInfo} /> : <Header />}
@@ -53,12 +71,9 @@ const Memories: React.FC = () => {
         {context?.userInfo ? <AddPost /> : <CreateAccount />}
       </main>
       <PostsContainer posts={posts} />
-      <div>{totalPages}</div>
+      {status === "successfull" && <div>{pagesNav}</div>}
     </div>
   );
 };
 
 export default Memories;
-function selectAllPosts(): (state: unknown) => unknown {
-  throw new Error("Function not implemented.");
-}
