@@ -12,6 +12,7 @@ export const getPosts = async (req, res) => {
 export const createPost = async (req, res) => {
   const { title, description, selectedFile } = req.body;
   const { token } = req.cookies;
+  console.log("createPost");
   try {
     const userInfo = jwt.verify(token, process.env.JWT_KEY);
     const user = await UsersModel.getById(userInfo._id);
@@ -19,6 +20,8 @@ export const createPost = async (req, res) => {
       title: title,
       message: description,
       selectedFile: selectedFile,
+      creatorName: user.firstName + " " + user.lastName,
+      creatorImage: user.image,
       creator: user,
     });
     await newPost.save();

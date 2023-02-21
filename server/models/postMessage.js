@@ -16,6 +16,14 @@ const dataSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  creatorName: {
+    type: String,
+    required: true,
+  },
+  creatorImage: {
+    type: String,
+    required: true,
+  },
   creator: {
     required: true,
     type: mongoose.Schema.Types.ObjectId,

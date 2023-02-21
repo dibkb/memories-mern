@@ -1,0 +1,12 @@
+@import "wrapper";
+.container__styles {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+  margin-top: 2rem;
+}
+.post__container {
+  height: 300px;
+  max-width: 600px;
+  border-radius: 9px;
+}

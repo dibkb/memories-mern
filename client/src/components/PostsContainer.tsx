@@ -1,16 +1,22 @@
 import React from "react";
-import Creator from "./Creator";
+// ------------styles-----------------
+import styles from "../styles/Postcontainer.module.scss";
 const PostsContainer: React.FC<PostsContainer> = ({ posts }) => {
   const content = posts.map((post: any) => {
-    console.log(post);
     return (
-      <div key={post._id}>
-        <img src={post.selectedFile} alt="" />
-        {/* <Creator id={post.creator} /> */}
-      </div>
+      <div
+        key={post._id}
+        className={styles.post__container}
+        style={{
+          backgroundImage: `url(${post.selectedFile})`,
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center",
+          backgroundSize: "cover",
+        }}
+      ></div>
     );
   });
-  return <div>{content}</div>;
+  return <div className={styles.container__styles}>{content}</div>;
 };
 interface PostsContainer {
   posts: any;
