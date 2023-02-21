@@ -40,7 +40,7 @@ export const CreatePostModal: React.FC<CreatePostModal> = ({
   }, [file]);
   // ----------enable disable button-------------------
   useEffect(() => {
-    if (title === "" || description === "" || file === "") {
+    if (title === "" || description === "" || file === null) {
       setDisableButton(true);
     } else {
       setDisableButton(false);

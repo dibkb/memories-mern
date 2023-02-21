@@ -2,8 +2,13 @@ import jwt from "jsonwebtoken";
 import { UsersModel } from "../models/usersModel.js";
 import { PostMessage } from "../models/postMessage.js";
 export const getPosts = async (req, res) => {
+  const page = parseInt(req.query.page || 0);
+  const PAGE_SIZE = 6;
   try {
-    const postMessages = await PostMessage.find().sort({ _id: -1 });
+    const postMessages = await PostMessage.find()
+      .sort({ _id: -1 })
+      .limit(PAGE_SIZE)
+      .skip(PAGE_SIZE * page);
     res.status(200).json(postMessages);
   } catch (error) {
     res.status(404).json(error.message);

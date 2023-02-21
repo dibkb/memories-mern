@@ -1,10 +1,13 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-const POST_URL = "http://localhost:4000/posts";
-export const fetchPosts = createAsyncThunk("posts/fetchPosts", async () => {
-  const response = await axios.get(POST_URL);
-  return response.data;
-});
+export const fetchPosts = createAsyncThunk(
+  "posts/fetchPosts",
+  async (pageNo) => {
+    const POST_URL = `http://localhost:4000/posts?page=${pageNo}`;
+    const response = await axios.get(POST_URL);
+    return response.data;
+  }
+);
 const initialState = {
   posts: [],
   // idle | loading | successfull | failed
