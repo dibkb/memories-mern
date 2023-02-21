@@ -10,13 +10,16 @@ import {
   getPostStatus,
   getPostError,
   fetchPosts,
+  getTotalPages,
 } from "../features/posts/postSlice.js";
 import PostsContainer from "../components/PostsContainer";
 const Memories: React.FC = () => {
+  const [currPage, setCurrPage] = useState<number>(0);
   const context = useContext(UserContext);
   const dispatch = useDispatch();
   const posts = useSelector(getAllPosts);
   const status = useSelector(getPostStatus);
+  const totalPages = useSelector(getTotalPages);
   const error = useSelector(getPostError);
   const fetchProfileInfo = () => {
     fetch("http://localhost:4000/users/profile", {
@@ -40,7 +43,7 @@ const Memories: React.FC = () => {
   }, []);
   useEffect(() => {
     if (status === "idle") {
-      dispatch(fetchPosts());
+      dispatch(fetchPosts(0));
     }
   }, [status, dispatch]);
   return (
@@ -50,6 +53,7 @@ const Memories: React.FC = () => {
         {context?.userInfo ? <AddPost /> : <CreateAccount />}
       </main>
       <PostsContainer posts={posts} />
+      <div>{totalPages}</div>
     </div>
   );
 };

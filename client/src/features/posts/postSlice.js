@@ -36,5 +36,6 @@ const postSlice = createSlice({
 });
 export const getAllPosts = (state) => state.posts.posts;
 export const getPostStatus = (state) => state.posts.status;
+export const getTotalPages = (state) => state.posts.totalPages;
 export const getPostError = (state) => state.posts.error;
 export default postSlice.reducer;
