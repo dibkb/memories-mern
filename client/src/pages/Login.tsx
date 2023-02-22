@@ -51,7 +51,7 @@ const Login: React.FC = () => {
             </p>
           </main>
         </section>
-        <section className={styles["__loginForm"]}>
+        <form className={styles["__loginForm"]} autoComplete="on">
           {/* Email*/}
           <div className={styles["email"]}>
             <pre className={styles["__label"]}>Email address</pre>
@@ -94,7 +94,7 @@ const Login: React.FC = () => {
               <p className={styles["neon"]}>Sign Up</p>
             </a>
           </Link>
-        </section>
+        </form>
       </main>
     </div>
   );
