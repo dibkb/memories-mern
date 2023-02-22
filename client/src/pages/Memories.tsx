@@ -40,7 +40,7 @@ const Memories: React.FC = () => {
     });
   };
   useEffect(() => {
-    if (context.userInfo) fetchProfileInfo();
+    fetchProfileInfo();
   }, []);
   useEffect(() => {
     if (status === "idle") {

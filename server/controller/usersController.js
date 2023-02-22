@@ -54,11 +54,11 @@ export const getProfile = async (req, res) => {
 export const getProfileById = async (req, res) => {
   const { id } = req.params;
   const { token } = req.cookies;
-  let userPosts;
+  // let userPosts;
   let userProfile;
   // ------------------ check if id is valid----------------------
   try {
-    userPosts = await PostMessage.find({ creator: id });
+    // userPosts = await PostMessage.find({ creator: id });
     userProfile = await UsersModel.findOne({ _id: id }).select("-password");
   } catch (error) {
     res.status(404).json(error.message);
@@ -69,13 +69,11 @@ export const getProfileById = async (req, res) => {
       const userInfo = jwt.verify(token, process.env.JWT_KEY);
       if (userInfo._id === id) {
         res.status(200).json({
-          userPosts: userPosts,
           userProfile: userProfile,
           admin: true,
         });
       } else {
         res.status(200).json({
-          userPosts: userPosts,
           userProfile: userProfile,
           admin: false,
         });
@@ -85,7 +83,6 @@ export const getProfileById = async (req, res) => {
     }
   } else {
     res.status(200).json({
-      userPosts: userPosts,
       userProfile: userProfile,
       admin: false,
     });

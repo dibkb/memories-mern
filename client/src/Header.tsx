@@ -26,7 +26,7 @@ const Header: React.FC<Header> = () => {
     });
   };
   useEffect(() => {
-    if (context.userInfo) fetchProfileInfo();
+    fetchProfileInfo();
   }, []);
   async function logoutHandler(
     e: React.MouseEvent<HTMLButtonElement>
@@ -38,7 +38,7 @@ const Header: React.FC<Header> = () => {
     }).then((response) => {
       if (response.ok) {
         context?.setUserInfo(null);
-        redirect("/memories");
+        return redirect("/memories");
       }
     });
   }

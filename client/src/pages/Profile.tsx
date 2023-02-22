@@ -6,18 +6,25 @@ import { UserContext } from "../UserContext";
 import {
   getUserProfile,
   getUserPosts,
-  getUserStatus,
+  getPostStatus,
+  getProfileStatus,
   getUserAdmin,
   fetchUserProfile,
 } from "../features/userPosts/userPostsSlice.js";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 const Profile: React.FC = () => {
-  const context = useContext(UserContext);
+  // const context = useContext(UserContext);
+  const { id } = useParams();
   const dispatch = useDispatch();
-  let { id } = useParams();
+  const profileInfo = useSelector(getUserProfile);
+  const profilePosts = useSelector(getUserPosts);
+  const profileStatus = useSelector(getProfileStatus);
+  const postStatus = useSelector(getPostStatus);
+  const isAdmin = useSelector(getUserAdmin);
   useEffect(() => {
     dispatch(fetchUserProfile(id));
   }, []);
+  console.log(profileInfo);
   return (
     <div className={styles["profile-container"]}>
       <Header />
