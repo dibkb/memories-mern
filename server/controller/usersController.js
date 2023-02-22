@@ -92,14 +92,15 @@ export const getProfilePosts = async (req, res) => {
   const { id } = req.params;
   const page = parseInt(req.query.page || 0);
   const PAGE_SIZE = 3;
-  console.log(id);
+  console.log(req.query);
   try {
     const postMessages = await PostMessage.find({ creator: id })
       .sort({ _id: -1 })
       .limit(PAGE_SIZE)
       .skip(PAGE_SIZE * page);
+    const total = await PostMessage.find({ creator: id }).countDocuments({});
     res.status(200).json({
-      totalPages: Math.ceil(postMessages.length / PAGE_SIZE),
+      totalPages: Math.ceil(total / PAGE_SIZE),
       posts: postMessages,
     });
   } catch (error) {

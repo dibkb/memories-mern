@@ -1,5 +1,6 @@
 import React from "react";
 import { colors } from "../utils/colors";
+
 const ProfileInfo: React.FC<ProfileInfo> = ({ name, image }) => {
   return (
     <div
