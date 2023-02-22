@@ -1,12 +1,33 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import styles from "../src/styles/Memories.module.scss";
 import Logo from "./components/Logo";
 import { colors } from "./utils/colors";
 import { userInfo } from "./UserContext";
 import ProfileInfo from "./components/ProfileInfo";
 import { UserContext } from "./UserContext";
-const Header: React.FC<Header> = ({ user }) => {
+import { Link } from "react-router-dom";
+const Header: React.FC<Header> = () => {
   const context = useContext(UserContext);
+  const fetchProfileInfo = () => {
+    fetch("http://localhost:4000/users/profile", {
+      method: "GET",
+      credentials: "include",
+    }).then((response) => {
+      if (response.ok) {
+        response.json().then((data) => {
+          context?.setUserInfo({
+            _id: data._id,
+            firstName: data.firstName,
+            lastName: data.lastName,
+            image: data.image,
+          });
+        });
+      }
+    });
+  };
+  useEffect(() => {
+    fetchProfileInfo();
+  }, []);
   async function logoutHandler(
     e: React.MouseEvent<HTMLButtonElement>
   ): Promise<void> {
@@ -29,9 +50,14 @@ const Header: React.FC<Header> = ({ user }) => {
           columnGap: "2rem",
         }}
       >
-        {user && (
+        {context.userInfo && (
           <>
-            <ProfileInfo name={user?.firstName} image={user?.image} />
+            <Link to="/profile">
+              <ProfileInfo
+                name={context.userInfo?.firstName}
+                image={context.userInfo?.image}
+              />
+            </Link>
             <button className={styles["logout__btn"]} onClick={logoutHandler}>
               Log out
             </button>

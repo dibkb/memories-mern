@@ -7,6 +7,7 @@ const ProfileInfo: React.FC<ProfileInfo> = ({ name, image }) => {
         display: "flex",
         alignItems: "center",
         columnGap: "1rem",
+        cursor: "pointer",
       }}
     >
       <img
@@ -24,7 +25,6 @@ const ProfileInfo: React.FC<ProfileInfo> = ({ name, image }) => {
           fontSize: "16px",
           color: colors.textSsecondary,
           fontFamily: "Inter, sans-serif",
-          cursor: "pointer",
         }}
       >
         {name}

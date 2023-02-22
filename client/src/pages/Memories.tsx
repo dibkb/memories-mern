@@ -70,7 +70,7 @@ const Memories: React.FC = () => {
   });
   return (
     <div className={styles["memories-container"]}>
-      {context?.userInfo ? <Header user={context?.userInfo} /> : <Header />}
+      <Header />
       <main className={styles["main"]}>
         {context?.userInfo ? <AddPost /> : <CreateAccount />}
       </main>
