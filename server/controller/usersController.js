@@ -88,6 +88,24 @@ export const getProfileById = async (req, res) => {
     });
   }
 };
+export const getProfilePosts = async (req, res) => {
+  const { id } = req.params;
+  const page = parseInt(req.query.page || 0);
+  const PAGE_SIZE = 3;
+  console.log(id);
+  try {
+    const postMessages = await PostMessage.find({ creator: id })
+      .sort({ _id: -1 })
+      .limit(PAGE_SIZE)
+      .skip(PAGE_SIZE * page);
+    res.status(200).json({
+      totalPages: Math.ceil(postMessages.length / PAGE_SIZE),
+      posts: postMessages,
+    });
+  } catch (error) {
+    res.status(404).json(error.message);
+  }
+};
 export const logoutUser = async (req, res) => {
   try {
     res.cookie("token", "").json();
