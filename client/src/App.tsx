@@ -15,7 +15,7 @@ const App: React.FC = () => {
           <Route path="/memories" element={<Memories />}></Route>
           <Route path="/register" element={<Register />}></Route>
           <Route path="/login" element={<Login />}></Route>
-          <Route path="/profile" element={<Profile />}></Route>
+          <Route path="/profile/:id" element={<Profile />}></Route>
         </Routes>
       </BrowserRouter>
     </UserContextProvider>

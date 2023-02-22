@@ -52,7 +52,7 @@ const Header: React.FC<Header> = () => {
       >
         {context.userInfo && (
           <>
-            <Link to="/profile">
+            <Link to={`/profile/${context.userInfo._id}`}>
               <ProfileInfo
                 name={context.userInfo?.firstName}
                 image={context.userInfo?.image}
