@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { useParams, useSearchParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Header from "../Header";
 import styles from "../styles/Profile.module.scss";
 import { UserContext } from "../UserContext";
@@ -12,6 +12,7 @@ import {
   fetchUserProfile,
 } from "../features/userPosts/userPostsSlice.js";
 import { useDispatch, useSelector } from "react-redux";
+import ProfileSection from "../components/ProfileSection";
 const Profile: React.FC = () => {
   // const context = useContext(UserContext);
   const { id } = useParams();
@@ -20,14 +21,14 @@ const Profile: React.FC = () => {
   const profilePosts = useSelector(getUserPosts);
   const profileStatus = useSelector(getProfileStatus);
   const postStatus = useSelector(getPostStatus);
-  const isAdmin = useSelector(getUserAdmin);
+  const isAdmin: boolean = useSelector(getUserAdmin);
   useEffect(() => {
     dispatch(fetchUserProfile(id));
   }, []);
-  console.log(profileInfo);
   return (
     <div className={styles["profile-container"]}>
       <Header />
+      <ProfileSection profile={profileInfo} isAdmin={isAdmin} />
     </div>
   );
 };

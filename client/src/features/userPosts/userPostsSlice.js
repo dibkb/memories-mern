@@ -19,7 +19,7 @@ export const fetchUserPosts = createAsyncThunk(
 const initialState = {
   userProfile: {},
   userPosts: [],
-  admin: null,
+  admin: false,
   totalPages: null,
   // idle | loading | successfull | failed
   postStatus: "idle",
