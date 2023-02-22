@@ -15,6 +15,7 @@ import {
 } from "../features/userPosts/userPostsSlice.js";
 import { useDispatch, useSelector } from "react-redux";
 import ProfileSection from "../components/ProfileSection";
+import PostsContainer from "../components/PostsContainer";
 const Profile: React.FC = () => {
   // const context = useContext(UserContext);
   const [currPage, setCurrPage] = useState<number>(0);
@@ -57,10 +58,12 @@ const Profile: React.FC = () => {
       </button>
     );
   });
+  console.log(isAdmin);
   return (
     <div className={styles["profile-container"]}>
       <Header />
       <ProfileSection profile={profileInfo} isAdmin={isAdmin} />
+      <PostsContainer posts={profilePosts} isAdmin={isAdmin} />
       <div className={styles["pagination__container"]}>{pagesNav}</div>
     </div>
   );

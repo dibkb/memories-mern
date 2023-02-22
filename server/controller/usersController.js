@@ -89,22 +89,39 @@ export const getProfileById = async (req, res) => {
   }
 };
 export const getProfilePosts = async (req, res) => {
+  const { token } = req.cookies;
   const { id } = req.params;
   const page = parseInt(req.query.page || 0);
   const PAGE_SIZE = 3;
-  console.log(req.query);
-  try {
-    const postMessages = await PostMessage.find({ creator: id })
+  let postMessages;
+  let total;
+  if (token) {
+    try {
+      const userInfo = jwt.verify(token, process.env.JWT_KEY);
+      postMessages = await PostMessage.find({ creator: id })
+        .sort({ _id: -1 })
+        .limit(PAGE_SIZE)
+        .skip(PAGE_SIZE * page);
+      total = await PostMessage.find({ creator: id }).countDocuments({});
+      res.status(200).json({
+        totalPages: Math.ceil(total / PAGE_SIZE),
+        posts: postMessages,
+        admin: userInfo._id === id,
+      });
+    } catch (error) {
+      res.status(404).json(error.message);
+    }
+  } else {
+    postMessages = await PostMessage.find({ creator: id })
       .sort({ _id: -1 })
       .limit(PAGE_SIZE)
       .skip(PAGE_SIZE * page);
-    const total = await PostMessage.find({ creator: id }).countDocuments({});
+    total = await PostMessage.find({ creator: id }).countDocuments({});
     res.status(200).json({
       totalPages: Math.ceil(total / PAGE_SIZE),
       posts: postMessages,
+      admin: false,
     });
-  } catch (error) {
-    res.status(404).json(error.message);
   }
 };
 export const logoutUser = async (req, res) => {

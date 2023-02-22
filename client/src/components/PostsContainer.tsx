@@ -3,7 +3,7 @@ import React from "react";
 import styles from "../styles/Postcontainer.module.scss";
 import { colors } from "../utils/colors";
 import { LikeCount } from "./LikeCount";
-const PostsContainer: React.FC<PostsContainer> = ({ posts }) => {
+const PostsContainer: React.FC<PostsContainer> = ({ posts, isAdmin }) => {
   const content = posts.map((post: any) => {
     return (
       <div
@@ -16,28 +16,30 @@ const PostsContainer: React.FC<PostsContainer> = ({ posts }) => {
           backgroundSize: "cover",
         }}
       >
-        <div className={styles.creator__info}>
-          <img
-            src={post.creatorImage}
-            alt=""
-            style={{
-              width: "36px",
-              height: "36px",
-              borderRadius: "50%",
-              border: `2px solid ${colors.neon}`,
-            }}
-          />
-          <small
-            style={{
-              fontSize: "16px",
-              color: colors.textSsecondary,
-              fontFamily: "Inter, sans-serif",
-            }}
-            className={styles["creator__name"]}
-          >
-            {post.creatorName}
-          </small>
-        </div>
+        {!isAdmin && (
+          <div className={styles.creator__info}>
+            <img
+              src={post.creatorImage}
+              alt=""
+              style={{
+                width: "36px",
+                height: "36px",
+                borderRadius: "50%",
+                border: `2px solid ${colors.neon}`,
+              }}
+            />
+            <small
+              style={{
+                fontSize: "16px",
+                color: colors.textSsecondary,
+                fontFamily: "Inter, sans-serif",
+              }}
+              className={styles["creator__name"]}
+            >
+              {post.creatorName}
+            </small>
+          </div>
+        )}
         <small className={styles["post__title"]}>{post.title}</small>
         <p className={styles["description"]}>{post.message}</p>
         <LikeCount id={post._id} likes={post.likeCount} />
@@ -48,5 +50,6 @@ const PostsContainer: React.FC<PostsContainer> = ({ posts }) => {
 };
 interface PostsContainer {
   posts: any;
+  isAdmin: boolean;
 }
 export default PostsContainer;

@@ -32,3 +32,28 @@
     }
   }
 }
+.profilePost__container {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+  margin: 2rem 0;
+  user-select: none;
+  .profile__post {
+    height: 300px;
+    max-width: 500px;
+    border-radius: 9px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    transition: 0.3s;
+    &:hover {
+      transform: scale(1.1);
+      cursor: pointer;
+      .creator__name,
+      .description,
+      .post__title {
+        visibility: visible;
+      }
+    }
+  }
+}
