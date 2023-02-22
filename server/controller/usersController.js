@@ -1,4 +1,5 @@
 import { UsersModel } from "../models/usersModel.js";
+import { PostMessage } from "../models/postMessage.js";
 import jwt from "jsonwebtoken";
 export const createJWT = (_id) => {
   return jwt.sign({ _id }, process.env.JWT_KEY, { expiresIn: "3d" });
@@ -51,12 +52,41 @@ export const getProfile = async (req, res) => {
   }
 };
 export const getProfileById = async (req, res) => {
-  const { id } = req.body;
+  const { id } = req.params;
+  const { token } = req.cookies;
+  let userPosts;
+  let userProfile;
+  // ------------------ check if id is valid----------------------
   try {
-    const user = await UsersModel.getById(id);
-    res.status(200).json(user);
+    userPosts = await PostMessage.find({ creator: id });
+    userProfile = await UsersModel.findOne({ _id: id }).select("-password");
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    res.status(404).json(error.message);
+  }
+  // ---------------------Check authentication--------------
+  if (token) {
+    try {
+      const userInfo = jwt.verify(token, process.env.JWT_KEY);
+      if (userInfo._id === id) {
+        res.status(200).json({
+          userPosts: userPosts,
+          userProfile: userProfile,
+          admin: true,
+        });
+      } else {
+        res.status(200).json({
+          userPosts: userPosts,
+          userProfile: userProfile,
+        });
+      }
+    } catch (error) {
+      res.status(400).json(error.message);
+    }
+  } else {
+    res.status(200).json({
+      userPosts: userPosts,
+      userProfile: userProfile,
+    });
   }
 };
 export const logoutUser = async (req, res) => {

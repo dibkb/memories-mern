@@ -6,8 +6,8 @@ const Profile = () => {
   const context = useContext(UserContext);
   console.log(context);
   return (
-    <div className={styles["memories-container"]}>
-      {context?.userInfo ? <Header user={context?.userInfo} /> : <Header />}
+    <div className={styles["profile-container"]}>
+      <Header />
     </div>
   );
 };
