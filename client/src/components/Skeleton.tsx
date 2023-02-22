@@ -1,7 +1,7 @@
 import React from "react";
 import { colors } from "../utils/colors";
-const Skeleton: React.FC = () => {
-  const skeleton = [...Array(6)].map((ele, index) => {
+const Skeleton: React.FC<Skeleton> = ({ items }) => {
+  const skeleton = [...Array(items)].map((ele, index) => {
     return (
       <div
         key={index}
@@ -28,5 +28,7 @@ const Skeleton: React.FC = () => {
     </div>
   );
 };
-
+interface Skeleton {
+  items: number;
+}
 export default Skeleton;

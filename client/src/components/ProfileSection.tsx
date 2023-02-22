@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "../styles/ProfileSection.module.scss";
+import { colors } from "../utils/colors";
 import { Pencil } from "../utils/Icons";
 const ProfileSection: React.FC<ProfileSection> = ({ profile, isAdmin }) => {
   return (
@@ -19,7 +20,7 @@ const ProfileSection: React.FC<ProfileSection> = ({ profile, isAdmin }) => {
       {isAdmin && (
         <button className={styles["edit__tag"]}>
           Edit
-          <Pencil />
+          <Pencil fill={colors.textDark} />
         </button>
       )}
     </div>

@@ -19,7 +19,8 @@
     cursor: pointer;
     .creator__name,
     .description,
-    .post__title {
+    .post__title,
+    .edit__Section {
       visibility: visible;
     }
   }
@@ -50,4 +51,23 @@
   gap: 0.4rem;
   cursor: pointer;
   width: fit-content;
+}
+.edit__Section {
+  visibility: hidden;
+  margin-left: auto;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  transition: 0.21s;
+  button {
+    padding: 0.5rem;
+    border-radius: 9px;
+    transform: scale(1.04);
+  }
+  .edit {
+    background-color: $blue;
+  }
+  .trash {
+    background-color: $red;
+  }
 }

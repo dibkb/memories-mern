@@ -74,8 +74,10 @@ const Memories: React.FC = () => {
       <main className={styles["main"]}>
         {context?.userInfo ? <AddPost /> : <CreateAccount />}
       </main>
-      {/* {status === "loading" && <Skeleton />} */}
-      <PostsContainer posts={posts} isAdmin={false} />
+      {status === "loading" && <Skeleton items={6} />}
+      {status === "successfull" && (
+        <PostsContainer posts={posts} isAdmin={false} />
+      )}
       {status === "successfull" && (
         <div className={styles["pagination__container"]}>{pagesNav}</div>
       )}

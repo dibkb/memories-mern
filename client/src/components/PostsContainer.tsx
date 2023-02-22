@@ -2,8 +2,19 @@ import React from "react";
 // ------------styles-----------------
 import styles from "../styles/Postcontainer.module.scss";
 import { colors } from "../utils/colors";
+import { Pencil, Trash } from "../utils/Icons";
 import { LikeCount } from "./LikeCount";
 const PostsContainer: React.FC<PostsContainer> = ({ posts, isAdmin }) => {
+  const editSection = (
+    <span className={styles["edit__Section"]}>
+      <button className={styles["edit"]}>
+        <Pencil />
+      </button>
+      <button className={styles["trash"]}>
+        <Trash />
+      </button>
+    </span>
+  );
   const content = posts.map((post: any) => {
     return (
       <div
@@ -40,6 +51,7 @@ const PostsContainer: React.FC<PostsContainer> = ({ posts, isAdmin }) => {
             </small>
           </div>
         )}
+        {isAdmin && editSection}
         <small className={styles["post__title"]}>{post.title}</small>
         <p className={styles["description"]}>{post.message}</p>
         <LikeCount id={post._id} likes={post.likeCount} />

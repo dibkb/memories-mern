@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Header from "../Header";
 import styles from "../styles/Profile.module.scss";
-import { UserContext } from "../UserContext";
+// import { UserContext } from "../UserContext";
 import {
   getUserProfile,
   getUserPosts,
@@ -16,6 +16,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import ProfileSection from "../components/ProfileSection";
 import PostsContainer from "../components/PostsContainer";
+import Skeleton from "../components/Skeleton";
 const Profile: React.FC = () => {
   // const context = useContext(UserContext);
   const [currPage, setCurrPage] = useState<number>(0);
@@ -23,7 +24,7 @@ const Profile: React.FC = () => {
   const dispatch = useDispatch();
   const profileInfo = useSelector(getUserProfile);
   const profilePosts = useSelector(getUserPosts);
-  const profileStatus = useSelector(getProfileStatus);
+  // const profileStatus = useSelector(getProfileStatus);
   const postStatus = useSelector(getPostStatus);
   const totalPages: number = useSelector(getTotalPages);
   const isAdmin: boolean = useSelector(getUserAdmin);
@@ -58,13 +59,17 @@ const Profile: React.FC = () => {
       </button>
     );
   });
-  console.log(isAdmin);
   return (
     <div className={styles["profile-container"]}>
       <Header />
       <ProfileSection profile={profileInfo} isAdmin={isAdmin} />
-      <PostsContainer posts={profilePosts} isAdmin={isAdmin} />
-      <div className={styles["pagination__container"]}>{pagesNav}</div>
+      {postStatus === "loading" && <Skeleton items={3} />}
+      {postStatus === "successfull" && (
+        <PostsContainer posts={profilePosts} isAdmin={isAdmin} />
+      )}
+      {postStatus === "successfull" && (
+        <div className={styles["pagination__container"]}>{pagesNav}</div>
+      )}
     </div>
   );
 };
