@@ -3,17 +3,20 @@ import { useParams, useSearchParams } from "react-router-dom";
 import Header from "../Header";
 import styles from "../styles/Profile.module.scss";
 import { UserContext } from "../UserContext";
-const Profile = () => {
+import {
+  getUserProfile,
+  getUserPosts,
+  getUserStatus,
+  getUserAdmin,
+  fetchUserProfile,
+} from "../features/userPosts/userPostsSlice.js";
+import { useDispatch } from "react-redux";
+const Profile: React.FC = () => {
   const context = useContext(UserContext);
+  const dispatch = useDispatch();
   let { id } = useParams();
   useEffect(() => {
-    fetch(`http://localhost:4000/users/${id}`, {
-      credentials: "include",
-    }).then((res) => {
-      if (res.ok) {
-        console.log(res.json());
-      }
-    });
+    dispatch(fetchUserProfile(id));
   }, []);
   return (
     <div className={styles["profile-container"]}>

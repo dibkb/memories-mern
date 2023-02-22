@@ -4,6 +4,7 @@ const Skeleton: React.FC = () => {
   const skeleton = [...Array(6)].map((ele, index) => {
     return (
       <div
+        key={index}
         style={{
           height: "300px",
           maxWidth: "600px",

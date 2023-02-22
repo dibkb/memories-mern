@@ -77,6 +77,7 @@ export const getProfileById = async (req, res) => {
         res.status(200).json({
           userPosts: userPosts,
           userProfile: userProfile,
+          admin: false,
         });
       }
     } catch (error) {
@@ -86,6 +87,7 @@ export const getProfileById = async (req, res) => {
     res.status(200).json({
       userPosts: userPosts,
       userProfile: userProfile,
+      admin: false,
     });
   }
 };

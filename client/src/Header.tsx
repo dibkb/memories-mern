@@ -5,7 +5,7 @@ import { colors } from "./utils/colors";
 import { userInfo } from "./UserContext";
 import ProfileInfo from "./components/ProfileInfo";
 import { UserContext } from "./UserContext";
-import { Link } from "react-router-dom";
+import { Link, redirect } from "react-router-dom";
 const Header: React.FC<Header> = () => {
   const context = useContext(UserContext);
   const fetchProfileInfo = () => {
@@ -26,7 +26,7 @@ const Header: React.FC<Header> = () => {
     });
   };
   useEffect(() => {
-    fetchProfileInfo();
+    if (context.userInfo) fetchProfileInfo();
   }, []);
   async function logoutHandler(
     e: React.MouseEvent<HTMLButtonElement>
@@ -38,6 +38,7 @@ const Header: React.FC<Header> = () => {
     }).then((response) => {
       if (response.ok) {
         context?.setUserInfo(null);
+        redirect("/memories");
       }
     });
   }
