@@ -30,7 +30,13 @@ const initialState = {
 const userPostSlice = createSlice({
   name: "userPosts",
   initialState,
-  reducers: {},
+  reducers: {
+    removeUserPost: (state, action) => {
+      state.userPosts = state.userPosts.filter(
+        (ele) => ele._id !== action.payload
+      );
+    },
+  },
   extraReducers(builder) {
     // ------------fetchUserProfile-------------------------------
     builder.addCase(fetchUserProfile.pending, (state, action) => {
@@ -50,7 +56,6 @@ const userPostSlice = createSlice({
       state.postStatus = "loading";
     });
     builder.addCase(fetchUserPosts.fulfilled, (state, { payload }) => {
-      console.log(payload);
       state.postStatus = "successfull";
       state.userPosts = payload.posts;
       state.totalPages = payload.totalPages;
@@ -62,7 +67,7 @@ const userPostSlice = createSlice({
     });
   },
 });
-
+export const { removeUserPost } = userPostSlice.actions;
 export const getUserProfile = (state) => state.user.userProfile;
 export const getUserPosts = (state) => state.user.userPosts;
 export const getPostStatus = (state) => state.user.postStatus;

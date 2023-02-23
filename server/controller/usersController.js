@@ -134,11 +134,12 @@ export const deleteUserPost = async (req, res) => {
   if (token) {
     try {
       const userInfo = jwt.verify(token, process.env.JWT_KEY);
-      console.log(userInfo);
-      const deletedPost = await PostMessage.findOneAndDelete({
+      PostMessage.findOneAndDelete({
+        _id: id,
         creator: userInfo._id,
+      }).then((response) => {
+        res.status(200).json({ message: "post sucessfully deleted" });
       });
-      res.status(200).json({ message: "Post deleted sucessfully" });
     } catch (error) {
       res.status(404).json({ message: "You are not authorized" });
     }

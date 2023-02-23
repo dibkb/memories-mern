@@ -1,5 +1,7 @@
 import { createPortal } from "react-dom";
+import { useDispatch } from "react-redux";
 import styles from "../styles/Notificationmodal.module.scss";
+import { removeUserPost } from "../features/userPosts/userPostsSlice.js";
 export const LoginModal = ({ setShowModal }) => {
   return createPortal(
     <div className={styles["modal__container"]}>
@@ -32,8 +34,19 @@ export const ErrorModule = ({ error, setShowModal }) => {
     document.body
   );
 };
-export const DeleteModal = ({ setShowModal, id }) => {
-  const deletePostHandler = async () => {};
+export const DeleteModal = (props) => {
+  const dispatch = useDispatch();
+  const deletePostHandler = (postId: string) => {
+    dispatch(removeUserPost(postId));
+    fetch(`http://localhost:4000/users/posts/${postId}`, {
+      method: "DELETE",
+      credentials: "include",
+    }).then((res) => {
+      if (res.ok) {
+        props.setShowModal(false);
+      }
+    });
+  };
   return createPortal(
     <div className={styles["modal__container"]}>
       <div className={styles["content"]}>
@@ -42,10 +55,16 @@ export const DeleteModal = ({ setShowModal, id }) => {
           Do you want to permanently remove this post.
         </p>
         <div className={styles["button__container"]}>
-          <button className={styles["yes"]} onClick={deletePostHandler}>
+          <button
+            className={styles["yes"]}
+            onClick={() => deletePostHandler(props.postId)}
+          >
             Yes
           </button>
-          <button className={styles["no"]} onClick={() => setShowModal(false)}>
+          <button
+            className={styles["no"]}
+            onClick={() => props.setShowModal(false)}
+          >
             No
           </button>
         </div>
