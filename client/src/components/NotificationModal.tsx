@@ -2,7 +2,27 @@ import { createPortal } from "react-dom";
 import styles from "../styles/Notificationmodal.module.scss";
 export const LoginModal = ({ setShowModal }) => {
   return createPortal(
-    <div className={styles["modal__container"]}>modal</div>,
+    <div className={styles["modal__container"]}>
+      <div className={styles["content"]}>
+        Account successfully created. You can now login.
+        <button className={styles["no"]} onClick={() => setShowModal(false)}>
+          No
+        </button>
+      </div>
+    </div>,
+    document.body
+  );
+};
+export const ErrorModule = ({ error, setShowModal }) => {
+  return createPortal(
+    <div className={styles["modal__container"]}>
+      <div className={styles["content"]}>
+        {error}
+        <button className={styles["no"]} onClick={() => setShowModal(false)}>
+          No
+        </button>
+      </div>
+    </div>,
     document.body
   );
 };

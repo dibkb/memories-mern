@@ -5,7 +5,7 @@ import { colors } from "../utils/colors";
 import { Pencil, Trash } from "../utils/Icons";
 import { CreatePostModal } from "./CreatePostModal";
 import { LikeCount } from "./LikeCount";
-import { DeleteModal } from "./NotificationModal";
+import { DeleteModal, LoginModal } from "./NotificationModal";
 const PostsContainer: React.FC<PostsContainer> = ({ posts, isAdmin }) => {
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -69,7 +69,7 @@ const PostsContainer: React.FC<PostsContainer> = ({ posts, isAdmin }) => {
     <div className={styles.container__styles}>
       {content}
       {showEditModal && <CreatePostModal setShowModal={setShowEditModal} />}
-      {showDeleteModal && <DeleteModal setShowModal={setShowDeleteModal} />}
+      {showDeleteModal && <LoginModal setShowModal={setShowDeleteModal} />}
     </div>
   );
 };
