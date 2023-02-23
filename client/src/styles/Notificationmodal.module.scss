@@ -7,7 +7,7 @@
   width: 100vw;
   //   border: 1px solid red;
   z-index: 100;
-  background: rgba(16, 16, 20, 0.8);
+  background: rgba(16, 16, 20, 0.6);
 }
 .content {
   position: absolute;
@@ -50,8 +50,15 @@
       background-color: $maroon;
     }
   }
-  .no {
+  .no,
+  .no__block {
     background-color: $card-background;
-    background-color: $text-gray-secondary;
+    &:hover {
+      background-color: $icon-fill;
+    }
+  }
+  .no__block {
+    display: block;
+    margin-top: 2rem;
   }
 }

@@ -63,13 +63,13 @@ const Profile: React.FC = () => {
     <div className={styles["profile-container"]}>
       <Header />
       <ProfileSection profile={profileInfo} isAdmin={isAdmin} />
-      {postStatus === "loading" && <Skeleton items={3} />}
+      {/* {postStatus === "loading" && <Skeleton items={3} />}
       {postStatus === "successfull" && (
         <PostsContainer posts={profilePosts} isAdmin={isAdmin} />
       )}
       {postStatus === "successfull" && (
         <div className={styles["pagination__container"]}>{pagesNav}</div>
-      )}
+      )} */}
     </div>
   );
 };

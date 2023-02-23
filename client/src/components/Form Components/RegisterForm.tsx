@@ -189,7 +189,7 @@ const RegisterForm: React.FC = () => {
     return <Navigate to={"/login"} />;
   }
   return (
-    <form className={styles["__form"]} autoComplete="on">
+    <form className={styles["__form"]} autoComplete="off">
       {/* Profile Picture */}
       <ProfilePicture
         profilePicture={profilePicture}

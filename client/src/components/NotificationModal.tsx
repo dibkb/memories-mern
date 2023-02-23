@@ -5,8 +5,11 @@ export const LoginModal = ({ setShowModal }) => {
     <div className={styles["modal__container"]}>
       <div className={styles["content"]}>
         Account successfully created. You can now login.
-        <button className={styles["no"]} onClick={() => setShowModal(false)}>
-          No
+        <button
+          className={styles["no__block"]}
+          onClick={() => setShowModal(false)}
+        >
+          Ok
         </button>
       </div>
     </div>,
@@ -18,8 +21,11 @@ export const ErrorModule = ({ error, setShowModal }) => {
     <div className={styles["modal__container"]}>
       <div className={styles["content"]}>
         {error}
-        <button className={styles["no"]} onClick={() => setShowModal(false)}>
-          No
+        <button
+          className={styles["no__block"]}
+          onClick={() => setShowModal(false)}
+        >
+          Ok
         </button>
       </div>
     </div>,

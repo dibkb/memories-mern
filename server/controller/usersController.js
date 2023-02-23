@@ -52,6 +52,7 @@ export const getProfile = async (req, res) => {
   }
 };
 export const getProfileById = async (req, res) => {
+  console.log("getProfileById");
   const { id } = req.params;
   const { token } = req.cookies;
   // let userPosts;
@@ -112,16 +113,30 @@ export const getProfilePosts = async (req, res) => {
       res.status(404).json(error.message);
     }
   } else {
-    postMessages = await PostMessage.find({ creator: id })
-      .sort({ _id: -1 })
-      .limit(PAGE_SIZE)
-      .skip(PAGE_SIZE * page);
-    total = await PostMessage.find({ creator: id }).countDocuments({});
-    res.status(200).json({
-      totalPages: Math.ceil(total / PAGE_SIZE),
-      posts: postMessages,
-      admin: false,
-    });
+    try {
+      postMessages = await PostMessage.find({ creator: id })
+        .sort({ _id: -1 })
+        .limit(PAGE_SIZE)
+        .skip(PAGE_SIZE * page);
+      total = await PostMessage.find({ creator: id }).countDocuments({});
+      res.status(200).json({
+        totalPages: Math.ceil(total / PAGE_SIZE),
+        posts: postMessages,
+        admin: false,
+      });
+    } catch (error) {
+      res.status(404).json(error.message);
+    }
+  }
+};
+export const deleteUserPost = async (req, res) => {
+  const { token } = req.cookies;
+  const { id } = req.params;
+  console.log(id);
+  res.status(200);
+  if (token) {
+  } else {
+    res.status(404).json({ message: "You are not authorized" });
   }
 };
 export const logoutUser = async (req, res) => {

@@ -1,11 +1,12 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 // ------------styles-----------------
 import styles from "../styles/Postcontainer.module.scss";
 import { colors } from "../utils/colors";
 import { Pencil, Trash } from "../utils/Icons";
 import { CreatePostModal } from "./CreatePostModal";
 import { LikeCount } from "./LikeCount";
-import { DeleteModal, LoginModal } from "./NotificationModal";
+import { DeleteModal } from "./NotificationModal";
 const PostsContainer: React.FC<PostsContainer> = ({ posts, isAdmin }) => {
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -35,7 +36,10 @@ const PostsContainer: React.FC<PostsContainer> = ({ posts, isAdmin }) => {
         }}
       >
         {!isAdmin && (
-          <div className={styles.creator__info}>
+          <Link
+            to={`/profile/${post.creator}`}
+            className={styles.creator__info}
+          >
             <img
               src={post.creatorImage}
               alt=""
@@ -56,12 +60,15 @@ const PostsContainer: React.FC<PostsContainer> = ({ posts, isAdmin }) => {
             >
               {post.creatorName}
             </small>
-          </div>
+          </Link>
         )}
         {isAdmin && editSection}
         <small className={styles["post__title"]}>{post.title}</small>
         <p className={styles["description"]}>{post.message}</p>
         <LikeCount id={post._id} likes={post.likeCount} />
+        {showDeleteModal && (
+          <DeleteModal setShowModal={setShowDeleteModal} id={post._id} />
+        )}
       </div>
     );
   });
@@ -69,7 +76,6 @@ const PostsContainer: React.FC<PostsContainer> = ({ posts, isAdmin }) => {
     <div className={styles.container__styles}>
       {content}
       {showEditModal && <CreatePostModal setShowModal={setShowEditModal} />}
-      {showDeleteModal && <LoginModal setShowModal={setShowDeleteModal} />}
     </div>
   );
 };
