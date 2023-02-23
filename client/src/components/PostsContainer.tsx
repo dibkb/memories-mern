@@ -1,16 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 // ------------styles-----------------
 import styles from "../styles/Postcontainer.module.scss";
 import { colors } from "../utils/colors";
 import { Pencil, Trash } from "../utils/Icons";
+import { CreatePostModal } from "./CreatePostModal";
 import { LikeCount } from "./LikeCount";
+import { DeleteModal } from "./NotificationModal";
 const PostsContainer: React.FC<PostsContainer> = ({ posts, isAdmin }) => {
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const editSection = (
     <span className={styles["edit__Section"]}>
-      <button className={styles["edit"]}>
+      <button className={styles["edit"]} onClick={() => setShowEditModal(true)}>
         <Pencil />
       </button>
-      <button className={styles["trash"]}>
+      <button
+        className={styles["trash"]}
+        onClick={() => setShowDeleteModal(true)}
+      >
         <Trash />
       </button>
     </span>
@@ -58,7 +65,13 @@ const PostsContainer: React.FC<PostsContainer> = ({ posts, isAdmin }) => {
       </div>
     );
   });
-  return <div className={styles.container__styles}>{content}</div>;
+  return (
+    <div className={styles.container__styles}>
+      {content}
+      {showEditModal && <CreatePostModal setShowModal={setShowEditModal} />}
+      {showDeleteModal && <DeleteModal setShowModal={setShowDeleteModal} />}
+    </div>
+  );
 };
 interface PostsContainer {
   posts: any;

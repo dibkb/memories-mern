@@ -37,7 +37,7 @@ export const CreatePostModal: React.FC<CreatePostModal> = ({
         .then((blob) => (blobURL = URL.createObjectURL(blob)))
         .then((img) => setDisplayPicture(img));
   }, [file]);
-  // ----------enable disable button-------------------
+  // ---------------enable disable button-------------------
   useEffect(() => {
     if (title === "" || description === "" || file === null) {
       setDisableButton(true);
