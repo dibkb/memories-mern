@@ -52,7 +52,6 @@ export const getProfile = async (req, res) => {
   }
 };
 export const getProfileById = async (req, res) => {
-  console.log("getProfileById");
   const { id } = req.params;
   const { token } = req.cookies;
   // let userPosts;
@@ -132,9 +131,17 @@ export const getProfilePosts = async (req, res) => {
 export const deleteUserPost = async (req, res) => {
   const { token } = req.cookies;
   const { id } = req.params;
-  console.log(id);
-  res.status(200);
   if (token) {
+    try {
+      const userInfo = jwt.verify(token, process.env.JWT_KEY);
+      console.log(userInfo);
+      const deletedPost = await PostMessage.findOneAndDelete({
+        creator: userInfo._id,
+      });
+      res.status(200).json({ message: "Post deleted sucessfully" });
+    } catch (error) {
+      res.status(404).json({ message: "You are not authorized" });
+    }
   } else {
     res.status(404).json({ message: "You are not authorized" });
   }
