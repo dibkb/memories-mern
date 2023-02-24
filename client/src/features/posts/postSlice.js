@@ -1,9 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { BASEURL } from "../../api/api";
 export const fetchPosts = createAsyncThunk(
   "posts/fetchPosts",
   async (pageNo = 0) => {
-    const POST_URL = `http://localhost:4000/posts?page=${pageNo}`;
+    const POST_URL = `${BASEURL}/posts?page=${pageNo}`;
     const response = await axios.get(POST_URL);
     return response.data;
   }
@@ -19,10 +20,7 @@ const postSlice = createSlice({
   name: "posts",
   initialState,
   reducers: {
-    addPost: (state, action) => {
-      // console.log(action.payload);
-      // state.posts = state.posts.unshift(action.payload);
-    },
+    addPost: (state, action) => {},
   },
   extraReducers(builder) {
     builder.addCase(fetchPosts.pending, (state, action) => {

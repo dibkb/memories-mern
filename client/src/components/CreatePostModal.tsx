@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import styles from "../styles/Postmodal.module.scss";
 import Resizer from "react-image-file-resizer";
+import { BASEURL } from "../api/api";
 export const CreatePostModal: React.FC<CreatePostModal> = ({
   setShowModal,
   id,
@@ -13,7 +14,7 @@ export const CreatePostModal: React.FC<CreatePostModal> = ({
   useEffect(() => {
     console.log(id);
     if (id) {
-      fetch(`http://localhost:4000/posts/${id}`, {
+      fetch(`${BASEURL}/posts/${id}`, {
         credentials: "include",
         method: "GET",
       })
@@ -34,7 +35,7 @@ export const CreatePostModal: React.FC<CreatePostModal> = ({
   const createPostHandler = async () => {
     setDisableButton(true);
     if (id) {
-      const response = await fetch(`http://localhost:4000/posts/${id}/`, {
+      const response = await fetch(`${BASEURL}/posts/${id}/`, {
         method: "PATCH",
         body: JSON.stringify({ title, description, selectedFile: file }),
         headers: { "Content-Type": "application/json" },
@@ -46,7 +47,7 @@ export const CreatePostModal: React.FC<CreatePostModal> = ({
         window.location.reload();
       }
     } else {
-      const response = await fetch("http://localhost:4000/posts", {
+      const response = await fetch(`${BASEURL}/posts`, {
         method: "POST",
         body: JSON.stringify({ title, description, selectedFile: file }),
         headers: { "Content-Type": "application/json" },

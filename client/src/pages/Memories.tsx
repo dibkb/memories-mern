@@ -14,6 +14,7 @@ import {
 } from "../features/posts/postSlice.js";
 import PostsContainer from "../components/PostsContainer";
 import Skeleton from "../components/Skeleton";
+import { BASEURL } from "../api/api";
 const Memories: React.FC = () => {
   const [currPage, setCurrPage] = useState<number>(0);
   const context = useContext(UserContext);
@@ -23,7 +24,7 @@ const Memories: React.FC = () => {
   const totalPages: number = useSelector(getTotalPages);
   const error = useSelector(getPostError);
   const fetchProfileInfo = () => {
-    fetch("http://localhost:4000/users/profile", {
+    fetch(`${BASEURL}/users/profile`, {
       method: "GET",
       credentials: "include",
     }).then((response) => {

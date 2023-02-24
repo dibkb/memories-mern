@@ -5,12 +5,13 @@ import { colors } from "./utils/colors";
 import { userInfo } from "./UserContext";
 import ProfileInfo from "./components/ProfileInfo";
 import { UserContext } from "./UserContext";
-import { Link, redirect, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { BASEURL } from "../src/api/api";
 const Header: React.FC<Header> = () => {
   const navigate = useNavigate();
   const context = useContext(UserContext);
   const fetchProfileInfo = () => {
-    fetch("http://localhost:4000/users/profile", {
+    fetch(`${BASEURL}/users/profile`, {
       method: "GET",
       credentials: "include",
     }).then((response) => {
@@ -33,7 +34,7 @@ const Header: React.FC<Header> = () => {
     e: React.MouseEvent<HTMLButtonElement>
   ): Promise<void> {
     e.preventDefault();
-    fetch("http://localhost:4000/users/logout", {
+    fetch(`${BASEURL}/users/logout`, {
       credentials: "include",
       method: "POST",
     }).then((response) => {

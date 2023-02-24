@@ -1,6 +1,7 @@
 import { createPortal } from "react-dom";
 import styles from "../styles/Notificationmodal.module.scss";
 import { useNavigate } from "react-router-dom";
+import { BASEURL } from "../api/api";
 export const LoginModal = ({ setShowModal }) => {
   const navigate = useNavigate();
   const routeToLogin = () => {
@@ -37,7 +38,7 @@ export const ErrorModule = ({ error, setShowModal }) => {
 };
 export const DeleteModal = (props) => {
   const deletePostHandler = (postId: string) => {
-    fetch(`http://localhost:4000/users/posts/${postId}`, {
+    fetch(`${BASEURL}/users/posts/${postId}`, {
       method: "DELETE",
       credentials: "include",
     }).then((res) => {

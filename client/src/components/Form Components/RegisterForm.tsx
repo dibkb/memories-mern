@@ -12,6 +12,7 @@ import {
   alphaNumericCheck,
 } from "../../utils/formValidation";
 import { ErrorModule, LoginModal } from "../NotificationModal";
+import { BASEURL } from "../../api/api";
 const haveAnAccount = (
   <Link to="/login" className="mx-auto">
     <a className={styles["__login"]}>
@@ -170,7 +171,7 @@ const RegisterForm: React.FC = () => {
   // ------------------------ CREATE ACCOUNT-------------------
   const createAcountHandler = async (e: any) => {
     e.preventDefault();
-    fetch("http://localhost:4000/users/signup", {
+    fetch(`${BASEURL}/users/signup`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

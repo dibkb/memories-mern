@@ -4,6 +4,7 @@ import { Link, Navigate } from "react-router-dom";
 import Logo from "../components/Logo";
 import { UserContext } from "../UserContext";
 import styles from "../styles/Login.module.scss";
+import { BASEURL } from "../api/api";
 const Login: React.FC = () => {
   const [redirect, setRedirect] = useState<boolean>(false);
   const [email, setEmail] = useState<string>("");
@@ -15,7 +16,7 @@ const Login: React.FC = () => {
     e: React.MouseEvent<HTMLButtonElement>
   ): Promise<void> => {
     e.preventDefault();
-    const response = await fetch("http://localhost:4000/users/login", {
+    const response = await fetch(`${BASEURL}/users/login`, {
       method: "POST",
       body: JSON.stringify({ email, password }),
       headers: { "Content-Type": "application/json" },

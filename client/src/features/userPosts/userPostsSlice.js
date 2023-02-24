@@ -1,9 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { BASEURL } from "../../api/api";
 export const fetchUserProfile = createAsyncThunk(
   "posts/fetchUser",
   async (id) => {
-    const POST_URL = `http://localhost:4000/users/${id}`;
+    const POST_URL = `${BASEURL}/users/${id}`;
     const response = await axios.get(POST_URL, { withCredentials: true });
     return response.data;
   }
@@ -12,7 +13,7 @@ export const fetchUserPosts = createAsyncThunk(
   "posts/fetchUserPosts",
   async (data) => {
     const { id, currPage } = data;
-    const POST_URL = `http://localhost:4000/users/${id}/posts?page=${currPage}`;
+    const POST_URL = `${BASEURL}/users/${id}/posts?page=${currPage}`;
     const response = await axios.get(POST_URL, { withCredentials: true });
     return response.data;
   }
