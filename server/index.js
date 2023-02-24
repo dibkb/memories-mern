@@ -26,4 +26,14 @@ if (process.env.PORT)
     .catch((error) => {
       console.log(error);
     });
+else {
+  mongoose
+    .connect(process.env.MONG0_URL)
+    .then(() => {
+      app.listen(4040);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
 export default app;
