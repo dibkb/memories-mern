@@ -5,8 +5,9 @@ import { colors } from "./utils/colors";
 import { userInfo } from "./UserContext";
 import ProfileInfo from "./components/ProfileInfo";
 import { UserContext } from "./UserContext";
-import { Link, redirect } from "react-router-dom";
+import { Link, redirect, useNavigate } from "react-router-dom";
 const Header: React.FC<Header> = () => {
+  const navigate = useNavigate();
   const context = useContext(UserContext);
   const fetchProfileInfo = () => {
     fetch("http://localhost:4000/users/profile", {
@@ -38,13 +39,15 @@ const Header: React.FC<Header> = () => {
     }).then((response) => {
       if (response.ok) {
         context?.setUserInfo(null);
-        return redirect("/memories");
+        navigate("/memories");
       }
     });
   }
   return (
     <nav className={styles["nav"]}>
-      <Logo large={false} color={colors.logo} />
+      <Link to="/memories">
+        <Logo large={false} color={colors.logo} />
+      </Link>
       <span
         style={{
           display: "flex",
