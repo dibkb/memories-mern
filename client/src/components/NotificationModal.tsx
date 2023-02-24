@@ -2,15 +2,18 @@ import { createPortal } from "react-dom";
 import { useDispatch } from "react-redux";
 import styles from "../styles/Notificationmodal.module.scss";
 import { removeUserPost } from "../features/userPosts/userPostsSlice.js";
+import { useNavigate } from "react-router-dom";
 export const LoginModal = ({ setShowModal }) => {
+  const navigate = useNavigate();
+  const routeToLogin = () => {
+    setShowModal(false);
+    navigate("/login");
+  };
   return createPortal(
     <div className={styles["modal__container"]}>
       <div className={styles["content"]}>
         Account successfully created. You can now login.
-        <button
-          className={styles["no__block"]}
-          onClick={() => setShowModal(false)}
-        >
+        <button className={styles["no__block"]} onClick={routeToLogin}>
           Ok
         </button>
       </div>

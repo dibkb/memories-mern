@@ -18,7 +18,12 @@ const initialState = {
 const postSlice = createSlice({
   name: "posts",
   initialState,
-  reducers: {},
+  reducers: {
+    addPost: (state, action) => {
+      // console.log(action.payload);
+      // state.posts = state.posts.unshift(action.payload);
+    },
+  },
   extraReducers(builder) {
     builder.addCase(fetchPosts.pending, (state, action) => {
       state.status = "loading";
@@ -34,6 +39,7 @@ const postSlice = createSlice({
     });
   },
 });
+export const { addPost } = postSlice.actions;
 export const getAllPosts = (state) => state.posts.posts;
 export const getPostStatus = (state) => state.posts.status;
 export const getTotalPages = (state) => state.posts.totalPages;

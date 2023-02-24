@@ -11,6 +11,7 @@ import {
   emailTest,
   alphaNumericCheck,
 } from "../../utils/formValidation";
+import { ErrorModule, LoginModal } from "../NotificationModal";
 const haveAnAccount = (
   <Link to="/login" className="mx-auto">
     <a className={styles["__login"]}>
@@ -20,7 +21,9 @@ const haveAnAccount = (
   </Link>
 );
 const RegisterForm: React.FC = () => {
-  const [redirect, setRedirect] = useState<boolean>(false);
+  const [loginModal, setLoginModal] = useState<boolean>(false);
+  const [errorModal, setErrorModal] = useState<boolean>(false);
+  const [serverError, setServerError] = useState<string | null>(null);
   const [profilePicture, setProfilePicture] = useState<any>();
   const [firstName, SetFirstName] = useState<string>("");
   const [firstNameError, setFirstNameError] = useState<TextError>({
@@ -177,19 +180,25 @@ const RegisterForm: React.FC = () => {
         lastName,
         image: profilePicture,
       }),
-    }).then((response) => {
-      if (response.ok) {
-        setRedirect(true);
-      } else {
-        // MOdal warning
-      }
-    });
+    })
+      .then((response) => {
+        if (response.ok) {
+          setLoginModal(true);
+        } else {
+          return response.json();
+        }
+      })
+      .then((json) => {
+        setErrorModal(true);
+        setServerError(json.error);
+      });
   };
-  if (redirect) {
-    return <Navigate to={"/login"} />;
-  }
   return (
     <form className={styles["__form"]} autoComplete="off">
+      {loginModal && <LoginModal setShowModal={setLoginModal} />}
+      {errorModal && (
+        <ErrorModule error={serverError} setShowModal={setErrorModal} />
+      )}
       {/* Profile Picture */}
       <ProfilePicture
         profilePicture={profilePicture}

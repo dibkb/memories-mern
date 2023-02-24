@@ -16,6 +16,7 @@ export const TextInput: React.FC<TextInput> = ({
     <span>
       <pre className={styles["__label"]}>{placeholder}</pre>
       <input
+        autoComplete="new-password"
         type="text"
         value={input}
         className={error.error ? styles["input__true"] : styles["input__"]}

@@ -33,7 +33,7 @@ export const createPost = async (req, res) => {
       creator: user,
     });
     await newPost.save();
-    res.status(201).send("new post created sucessfully");
+    res.status(201).send(newPost);
   } catch (error) {
     res.status(404).json(error.message);
   }

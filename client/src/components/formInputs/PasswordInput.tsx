@@ -24,6 +24,7 @@ export const PasswordInput: React.FC<PasswordInput> = ({
           value={input}
           onChange={onChangeHandler}
           className={error.error ? styles["input__true"] : styles["input__"]}
+          autoComplete="new-password"
         />
         <span
           className={styles["__eyeicon__container"]}

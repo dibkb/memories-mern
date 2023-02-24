@@ -13,7 +13,6 @@ export const CreatePostModal: React.FC<CreatePostModal> = ({
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [file, setFile] = useState<any>(null);
-  const [displayPicture, setDisplayPicture] = useState<string>("");
   const [diableButton, setDisableButton] = useState(true);
   const createPostHandler = async () => {
     setDisableButton(true);
@@ -25,18 +24,10 @@ export const CreatePostModal: React.FC<CreatePostModal> = ({
     });
     if (response.ok) {
       setShowModal(false);
-      window.location.reload();
+      // window.location.reload();
     }
     setDisableButton(false);
   };
-  useEffect(() => {
-    let blobURL: string;
-    if (file)
-      fetch(file)
-        .then((res) => res.blob())
-        .then((blob) => (blobURL = URL.createObjectURL(blob)))
-        .then((img) => setDisplayPicture(img));
-  }, [file]);
   // ---------------enable disable button-------------------
   useEffect(() => {
     if (title === "" || description === "" || file === null) {
@@ -114,7 +105,7 @@ export const CreatePostModal: React.FC<CreatePostModal> = ({
         <div className={styles["file__input"]}>
           <input type="file" name="file" onChange={onFileSelect} />
         </div>
-        <img src={displayPicture} className={styles["image__preview"]} />
+        <img src={file} className={styles["image__preview"]} />
       </div>
     </div>,
     document.body
