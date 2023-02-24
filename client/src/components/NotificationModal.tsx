@@ -1,7 +1,5 @@
 import { createPortal } from "react-dom";
-import { useDispatch } from "react-redux";
 import styles from "../styles/Notificationmodal.module.scss";
-import { removeUserPost } from "../features/userPosts/userPostsSlice.js";
 import { useNavigate } from "react-router-dom";
 export const LoginModal = ({ setShowModal }) => {
   const navigate = useNavigate();
@@ -38,15 +36,14 @@ export const ErrorModule = ({ error, setShowModal }) => {
   );
 };
 export const DeleteModal = (props) => {
-  const dispatch = useDispatch();
   const deletePostHandler = (postId: string) => {
-    dispatch(removeUserPost(postId));
     fetch(`http://localhost:4000/users/posts/${postId}`, {
       method: "DELETE",
       credentials: "include",
     }).then((res) => {
       if (res.ok) {
         props.setShowModal(false);
+        window.location.reload();
       }
     });
   };

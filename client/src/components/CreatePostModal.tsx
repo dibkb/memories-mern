@@ -13,7 +13,7 @@ export const CreatePostModal: React.FC<CreatePostModal> = ({
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [file, setFile] = useState<any>(null);
-  const [diableButton, setDisableButton] = useState(true);
+  const [diableButton, setDisableButton] = useState<boolean>(true);
   const createPostHandler = async () => {
     setDisableButton(true);
     const response = await fetch("http://localhost:4000/posts", {
@@ -24,7 +24,7 @@ export const CreatePostModal: React.FC<CreatePostModal> = ({
     });
     if (response.ok) {
       setShowModal(false);
-      // window.location.reload();
+      window.location.reload();
     }
     setDisableButton(false);
   };
