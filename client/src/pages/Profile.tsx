@@ -24,7 +24,7 @@ const Profile: React.FC = () => {
   const dispatch = useDispatch();
   const profileInfo = useSelector(getUserProfile);
   const profilePosts = useSelector(getUserPosts);
-  // const profileStatus = useSelector(getProfileStatus);
+  const profileStatus = useSelector(getProfileStatus);
   const postStatus = useSelector(getPostStatus);
   const totalPages: number = useSelector(getTotalPages);
   const isAdmin: boolean = useSelector(getUserAdmin);
@@ -62,7 +62,9 @@ const Profile: React.FC = () => {
   return (
     <div className={styles["profile-container"]}>
       <Header />
-      <ProfileSection profile={profileInfo} isAdmin={isAdmin} />
+      {profileStatus === "successfull" && (
+        <ProfileSection profile={profileInfo} isAdmin={isAdmin} />
+      )}
       {postStatus === "loading" && <Skeleton items={3} />}
       {postStatus === "successfull" && (
         <PostsContainer posts={profilePosts} isAdmin={isAdmin} />

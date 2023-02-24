@@ -38,6 +38,28 @@ export const createPost = async (req, res) => {
     res.status(404).json(error.message);
   }
 };
+export const updatePost = async (req, res) => {
+  const { id } = req.params;
+  const { title, description, selectedFile } = req.body;
+  const { token } = req.cookies;
+  try {
+    const userInfo = jwt.verify(token, process.env.JWT_KEY);
+    await PostMessage.findOneAndUpdate(
+      {
+        _id: id,
+        creator: userInfo._id,
+      },
+      {
+        title: title,
+        message: description,
+        selectedFile: selectedFile,
+      }
+    );
+    res.status(200).send("Post updated sucessfully");
+  } catch (error) {
+    res.status(404).json(error.message);
+  }
+};
 export const likePost = async (req, res) => {
   const { id } = req.params;
   try {
@@ -47,5 +69,23 @@ export const likePost = async (req, res) => {
     res.status(200).send("Post updated sucessfully");
   } catch (error) {
     res.status(400).send(error.message);
+  }
+};
+export const getPostById = async (req, res) => {
+  const { id } = req.params;
+  const { token } = req.cookies;
+  if (token) {
+    const userInfo = jwt.verify(token, process.env.JWT_KEY);
+    try {
+      const post = await PostMessage.findOne({
+        _id: id,
+        creator: userInfo._id,
+      });
+      res.status(200).json(post);
+    } catch (error) {
+      res.status(400).json(error.message);
+    }
+  } else {
+    res.status(400).json({ message: "You are not authorized" });
   }
 };

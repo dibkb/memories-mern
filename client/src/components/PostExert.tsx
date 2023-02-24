@@ -66,7 +66,9 @@ const PostExert = ({ post, isAdmin }) => {
       {showDeleteModal && isAdmin && (
         <DeleteModal setShowModal={setShowDeleteModal} postId={post._id} />
       )}
-      {showEditModal && <CreatePostModal setShowModal={setShowEditModal} />}
+      {showEditModal && isAdmin && (
+        <CreatePostModal setShowModal={setShowEditModal} id={post._id} />
+      )}
     </div>
   );
 };

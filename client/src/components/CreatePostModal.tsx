@@ -4,28 +4,60 @@ import styles from "../styles/Postmodal.module.scss";
 import Resizer from "react-image-file-resizer";
 export const CreatePostModal: React.FC<CreatePostModal> = ({
   setShowModal,
+  id,
 }) => {
+  const [title, setTitle] = useState<string>("");
+  const [description, setDescription] = useState<string>("");
+  const [file, setFile] = useState<any>(null);
+  const [diableButton, setDisableButton] = useState<boolean>(true);
+  useEffect(() => {
+    console.log(id);
+    if (id) {
+      fetch(`http://localhost:4000/posts/${id}`, {
+        credentials: "include",
+        method: "GET",
+      })
+        .then((response) => response.json())
+        .then((json) => {
+          const { title, message, selectedFile } = json;
+          setTitle(title);
+          setDescription(message);
+          setFile(selectedFile);
+        });
+    }
+  }, [id]);
   const handleKeyDown = (e: any) => {
     e.target.style.height = "inherit";
     if (e.target.scrollHeight < 250)
       e.target.style.height = `${e.target.scrollHeight}px`;
   };
-  const [title, setTitle] = useState<string>("");
-  const [description, setDescription] = useState<string>("");
-  const [file, setFile] = useState<any>(null);
-  const [diableButton, setDisableButton] = useState<boolean>(true);
   const createPostHandler = async () => {
     setDisableButton(true);
-    const response = await fetch("http://localhost:4000/posts", {
-      method: "POST",
-      body: JSON.stringify({ title, description, selectedFile: file }),
-      headers: { "Content-Type": "application/json" },
-      credentials: "include",
-    });
-    if (response.ok) {
-      setShowModal(false);
-      window.location.reload();
+    if (id) {
+      const response = await fetch(`http://localhost:4000/posts/${id}/`, {
+        method: "PATCH",
+        body: JSON.stringify({ title, description, selectedFile: file }),
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+      });
+      console.log(response);
+      if (response.ok) {
+        setShowModal(false);
+        window.location.reload();
+      }
+    } else {
+      const response = await fetch("http://localhost:4000/posts", {
+        method: "POST",
+        body: JSON.stringify({ title, description, selectedFile: file }),
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+      });
+      if (response.ok) {
+        setShowModal(false);
+        window.location.reload();
+      }
     }
+
     setDisableButton(false);
   };
   // ---------------enable disable button-------------------
@@ -113,4 +145,5 @@ export const CreatePostModal: React.FC<CreatePostModal> = ({
 };
 interface CreatePostModal {
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
+  id?: string;
 }
