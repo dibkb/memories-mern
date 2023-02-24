@@ -16,14 +16,14 @@ app.use(express.json({ limit: "50mb" }));
 // routes
 app.use("/posts", postRouter);
 app.use("/users", userRouter);
-mongoose
-  .connect(process.env.MONG0_URL)
-  .then(() => {
-    // listen for requests
-    app.listen(process.env.PORT, () => {
-      console.log("connected to db & listening on port", process.env.PORT);
+if (process.env.PORT)
+  mongoose
+    .connect(process.env.MONG0_URL)
+    .then(() => {
+      // listen for requests
+      app.listen(process.env.PORT);
+    })
+    .catch((error) => {
+      console.log(error);
     });
-  })
-  .catch((error) => {
-    console.log(error);
-  });
+export default app;

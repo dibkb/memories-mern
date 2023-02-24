@@ -12,7 +12,6 @@ export const CreatePostModal: React.FC<CreatePostModal> = ({
   const [file, setFile] = useState<any>(null);
   const [diableButton, setDisableButton] = useState<boolean>(true);
   useEffect(() => {
-    console.log(id);
     if (id) {
       fetch(`${BASEURL}/posts/${id}`, {
         credentials: "include",
