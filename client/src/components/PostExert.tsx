@@ -6,7 +6,7 @@ import { LikeCount } from "./LikeCount";
 import { DeleteModal } from "./NotificationModal";
 import styles from "../styles/Postcontainer.module.scss";
 import { Link } from "react-router-dom";
-const PostExert = ({ post, isAdmin }) => {
+const PostExert: React.FC<PostExert> = ({ post, isAdmin }) => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   return (
@@ -74,3 +74,7 @@ const PostExert = ({ post, isAdmin }) => {
 };
 
 export default PostExert;
+interface PostExert {
+  post: any;
+  isAdmin: any;
+}

@@ -4,7 +4,7 @@ import styles from "../styles/Postcontainer.module.scss";
 import axios from "axios";
 import { BASEURL } from "../api/api";
 
-export const LikeCount = ({ id, likes }) => {
+export const LikeCount: React.FC<LikeCount> = ({ id, likes }) => {
   const [likeCount, setLikeCount] = useState<number>(likes);
   const [clicked, setClicked] = useState<boolean>(false);
   const likeCountHandler = async () => {
@@ -19,3 +19,7 @@ export const LikeCount = ({ id, likes }) => {
     </span>
   );
 };
+interface LikeCount {
+  id: string;
+  likes: number;
+}
