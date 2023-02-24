@@ -17,17 +17,17 @@ import { useDispatch, useSelector } from "react-redux";
 import ProfileSection from "../components/ProfileSection";
 import PostsContainer from "../components/PostsContainer";
 import Skeleton from "../components/Skeleton";
-const Profile: React.FC = () => {
+const Profile = () => {
   // const context = useContext(UserContext);
-  const [currPage, setCurrPage] = useState<number>(0);
+  const [currPage, setCurrPage] = useState(0);
   const { id } = useParams();
   const dispatch = useDispatch();
   const profileInfo = useSelector(getUserProfile);
   const profilePosts = useSelector(getUserPosts);
   const profileStatus = useSelector(getProfileStatus);
   const postStatus = useSelector(getPostStatus);
-  const totalPages: number = useSelector(getTotalPages);
-  const isAdmin: boolean = useSelector(getUserAdmin);
+  const totalPages = useSelector(getTotalPages);
+  const isAdmin = useSelector(getUserAdmin);
   useEffect(() => {
     dispatch(fetchUserProfile(id));
   }, []);

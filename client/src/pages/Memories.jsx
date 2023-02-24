@@ -15,13 +15,13 @@ import {
 import PostsContainer from "../components/PostsContainer";
 import Skeleton from "../components/Skeleton";
 import { BASEURL } from "../api/api";
-const Memories: React.FC = () => {
-  const [currPage, setCurrPage] = useState<number>(0);
+const Memories = () => {
+  const [currPage, setCurrPage] = useState(0);
   const context = useContext(UserContext);
   const dispatch = useDispatch();
   const posts = useSelector(getAllPosts);
   const status = useSelector(getPostStatus);
-  const totalPages: number = useSelector(getTotalPages);
+  const totalPages = useSelector(getTotalPages);
   const error = useSelector(getPostError);
   const fetchProfileInfo = () => {
     fetch(`${BASEURL}/users/profile`, {
