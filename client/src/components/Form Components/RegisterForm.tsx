@@ -186,18 +186,19 @@ const RegisterForm: React.FC = () => {
         if (response.ok) {
           setLoginModal(true);
         } else {
+          setLoginModal(false);
+          setErrorModal(true);
           return response.json();
         }
       })
       .then((json) => {
-        setErrorModal(true);
         setServerError(json.error);
       });
   };
   return (
     <form className={styles["__form"]} autoComplete="off">
-      {loginModal && <LoginModal setShowModal={setLoginModal} />}
-      {errorModal && (
+      {loginModal && !errorModal && <LoginModal setShowModal={setLoginModal} />}
+      {errorModal && !loginModal && (
         <ErrorModule error={serverError} setShowModal={setErrorModal} />
       )}
       {/* Profile Picture */}
