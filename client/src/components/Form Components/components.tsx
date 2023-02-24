@@ -46,7 +46,7 @@ export const ProfilePicture: React.FC<ProfilePicture> = ({
   const imageSelectHandler = async (e: any) => {
     try {
       const file = e.target.files[0];
-      const image = await resizeFile(file);
+      const image = (await resizeFile(file)) as string;
       setProfilePicture(image);
     } catch (err) {
       console.error(err);

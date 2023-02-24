@@ -2,7 +2,7 @@ import { createPortal } from "react-dom";
 import styles from "../styles/Notificationmodal.module.scss";
 import { useNavigate } from "react-router-dom";
 import { BASEURL } from "../api/api";
-export const LoginModal = ({ setShowModal }) => {
+export const LoginModal: React.FC<LoginModal> = ({ setShowModal }) => {
   const navigate = useNavigate();
   const routeToLogin = () => {
     setShowModal(false);
@@ -20,7 +20,7 @@ export const LoginModal = ({ setShowModal }) => {
     document.body
   );
 };
-export const ErrorModule = ({ error, setShowModal }) => {
+export const ErrorModule: React.FC<ErrorModule> = ({ error, setShowModal }) => {
   return createPortal(
     <div className={styles["modal__container"]}>
       <div className={styles["content"]}>
@@ -36,14 +36,17 @@ export const ErrorModule = ({ error, setShowModal }) => {
     document.body
   );
 };
-export const DeleteModal = (props) => {
+export const DeleteModal: React.FC<DeleteModal> = ({
+  setShowModal,
+  postId,
+}) => {
   const deletePostHandler = (postId: string) => {
     fetch(`${BASEURL}/users/posts/${postId}`, {
       method: "DELETE",
       credentials: "include",
     }).then((res) => {
       if (res.ok) {
-        props.setShowModal(false);
+        setShowModal(false);
         window.location.reload();
       }
     });
@@ -58,14 +61,11 @@ export const DeleteModal = (props) => {
         <div className={styles["button__container"]}>
           <button
             className={styles["yes"]}
-            onClick={() => deletePostHandler(props.postId)}
+            onClick={() => deletePostHandler(postId)}
           >
             Yes
           </button>
-          <button
-            className={styles["no"]}
-            onClick={() => props.setShowModal(false)}
-          >
+          <button className={styles["no"]} onClick={() => setShowModal(false)}>
             No
           </button>
         </div>
@@ -74,3 +74,14 @@ export const DeleteModal = (props) => {
     document.body
   );
 };
+interface LoginModal {
+  setShowModal: any;
+}
+interface ErrorModule {
+  error: any;
+  setShowModal: any;
+}
+interface DeleteModal {
+  postId: any;
+  setShowModal: any;
+}
