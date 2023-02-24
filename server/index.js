@@ -9,7 +9,9 @@ import cookieParser from "cookie-parser";
 dotenv.config();
 const app = express();
 // middlewares
-app.use(cors({ credentials: true, origin: "http://localhost:5173" }));
+app.use(
+  cors({ credentials: true, origin: "https://memoriesapi.onrender.com" })
+);
 app.use(bodyParser.urlencoded({ limit: `50mb`, extended: true }));
 app.use(cookieParser());
 app.use(express.json({ limit: "50mb" }));
