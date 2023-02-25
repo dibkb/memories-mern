@@ -12,11 +12,10 @@ const app = express();
 app.use(
   cors({
     credentials: true,
-    origin: [
-      "http://localhost:5173",
-      "https://memoriies.netlify.app",
+    origin:
+      // "http://localhost:5173",
+      // "https://memoriies.netlify.app",
       "https://memories-mern-gray.vercel.app",
-    ],
   })
 );
 app.use(bodyParser.urlencoded({ limit: `50mb`, extended: true }));
