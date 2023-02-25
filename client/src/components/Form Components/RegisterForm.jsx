@@ -21,38 +21,38 @@ const haveAnAccount = (
     </a>
   </Link>
 );
-const RegisterForm: React.FC = () => {
-  const [loginModal, setLoginModal] = useState<boolean>(false);
-  const [errorModal, setErrorModal] = useState<boolean>(false);
-  const [serverError, setServerError] = useState<string | null>(null);
-  const [profilePicture, setProfilePicture] = useState<any>();
-  const [firstName, SetFirstName] = useState<string>("");
-  const [firstNameError, setFirstNameError] = useState<TextError>({
+const RegisterForm = () => {
+  const [loginModal, setLoginModal] = useState(false);
+  const [errorModal, setErrorModal] = useState(false);
+  const [serverError, setServerError] = useState(null);
+  const [profilePicture, setProfilePicture] = useState();
+  const [firstName, SetFirstName] = useState("");
+  const [firstNameError, setFirstNameError] = useState({
     error: null,
     message: null,
   });
-  const [lastName, SetLastName] = useState<string>("");
-  const [lastNameError, setLastNameError] = useState<TextError>({
+  const [lastName, SetLastName] = useState("");
+  const [lastNameError, setLastNameError] = useState({
     error: null,
     message: null,
   });
-  const [email, SetEmail] = useState<string>("");
-  const [emailError, setEmailError] = useState<TextError>({
+  const [email, SetEmail] = useState("");
+  const [emailError, setEmailError] = useState({
     error: null,
     message: null,
   });
-  const [password, SetPassword] = useState<string>("");
-  const [confirmPassword, SetConfirmPassword] = useState<string>("");
-  const [passwordError, setPasswordError] = useState<TextError>({
+  const [password, SetPassword] = useState("");
+  const [confirmPassword, SetConfirmPassword] = useState("");
+  const [passwordError, setPasswordError] = useState({
     error: null,
     message: null,
   });
-  const [confirmPasswordError, setConfirmPasswordError] = useState<TextError>({
+  const [confirmPasswordError, setConfirmPasswordError] = useState({
     error: null,
     message: null,
   });
-  const [acceptTerms, setAcceptterms] = useState<boolean>(false);
-  const [isValidated, setIsValidated] = useState<boolean>(false);
+  const [acceptTerms, setAcceptterms] = useState(false);
+  const [isValidated, setIsValidated] = useState(false);
   // ------------------- Firstname validation------------------------
   useEffect(() => {
     if (firstName !== "") {
@@ -169,7 +169,7 @@ const RegisterForm: React.FC = () => {
     acceptTerms,
   ]);
   // ------------------------ CREATE ACCOUNT-------------------
-  const createAcountHandler = async (e: any) => {
+  const createAcountHandler = async (e) => {
     e.preventDefault();
     fetch(`${BASEURL}/users/signup`, {
       method: "POST",
@@ -255,7 +255,3 @@ const RegisterForm: React.FC = () => {
   );
 };
 export default RegisterForm;
-export interface TextError {
-  error: boolean | null;
-  message: string | null;
-}

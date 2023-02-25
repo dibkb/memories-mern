@@ -2,7 +2,7 @@ import React from "react";
 import RegisterForm from "../components/Form Components/RegisterForm";
 import Logo from "../components/Logo";
 import styles from "../styles/Register.module.scss";
-const Register: React.FC = () => {
+const Register = () => {
   return (
     <div className={styles["register__container"]}>
       <main className={styles["__main"]}>

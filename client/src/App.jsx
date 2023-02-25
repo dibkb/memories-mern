@@ -6,7 +6,7 @@ import Memories from "./pages/Memories";
 import Profile from "./pages/Profile";
 import Register from "./pages/Register";
 import { UserContextProvider } from "./UserContext";
-const App: React.FC = () => {
+const App = () => {
   return (
     <UserContextProvider>
       <BrowserRouter>

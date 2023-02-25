@@ -6,8 +6,8 @@ import { userInfo } from "./UserContext";
 import ProfileInfo from "./components/ProfileInfo";
 import { UserContext } from "./UserContext";
 import { Link, useNavigate } from "react-router-dom";
-import { BASEURL } from "../src/api/api";
-const Header: React.FC<Header> = () => {
+import { BASEURL } from "./api/api";
+const Header = () => {
   const navigate = useNavigate();
   const context = useContext(UserContext);
   const fetchProfileInfo = () => {
@@ -30,9 +30,7 @@ const Header: React.FC<Header> = () => {
   useEffect(() => {
     fetchProfileInfo();
   }, []);
-  async function logoutHandler(
-    e: React.MouseEvent<HTMLButtonElement>
-  ): Promise<void> {
+  async function logoutHandler(e) {
     e.preventDefault();
     fetch(`${BASEURL}/users/logout`, {
       credentials: "include",
@@ -73,6 +71,3 @@ const Header: React.FC<Header> = () => {
   );
 };
 export default Header;
-interface Header {
-  user?: userInfo;
-}
