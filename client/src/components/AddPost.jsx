@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { CameraIcon } from "@heroicons/react/24/solid";
 import styles from "../styles/Utils.module.scss";
 import { CreatePostModal } from "./CreatePostModal";
 const AddPost = () => {
-  const [showModal, setShowModal] = React.useState < boolean > false;
+  const [showModal, setShowModal] = useState(false);
   return (
     <>
       <div className={styles["add-post"]} onClick={() => setShowModal(true)}>
