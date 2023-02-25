@@ -3,7 +3,7 @@ import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid";
 import styles from "../../styles/Form.module.scss";
 import { WarningIcon } from "../../utils/Icons";
 export const PasswordInput = ({ placeholder, input, setInput, error }) => {
-  const [showPw, setShowPw] = useState < boolean > false;
+  const [showPw, setShowPw] = useState(false);
   const onChangeHandler = (e) => {
     e.preventDefault;
     setInput(e.target.value);

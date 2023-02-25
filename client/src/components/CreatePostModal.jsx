@@ -4,10 +4,10 @@ import styles from "../styles/Postmodal.module.scss";
 import Resizer from "../api/Resizer";
 import { BASEURL } from "../api/api";
 export const CreatePostModal = ({ setShowModal, id }) => {
-  const [title, setTitle] = useState < string > "";
-  const [description, setDescription] = useState < string > "";
-  const [file, setFile] = useState < any > null;
-  const [diableButton, setDisableButton] = useState < boolean > true;
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [file, setFile] = useState(null);
+  const [diableButton, setDisableButton] = useState(true);
   useEffect(() => {
     if (id) {
       fetch(`${BASEURL}/posts/${id}`, {
