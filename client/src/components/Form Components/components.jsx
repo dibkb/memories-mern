@@ -2,10 +2,7 @@ import React, { useEffect, useState } from "react";
 import styles from "../../styles/components.module.scss";
 import profile from "../../assets/profile.svg";
 import Resizer from "../../api/Resizer";
-export const CreateAccount: React.FC<CreateAccount> = ({
-  isValidated,
-  createAcountHandler,
-}) => {
+export const CreateAccount = ({ isValidated, createAcountHandler }) => {
   return (
     <button
       className={styles[`create__btn__${isValidated}`]}
@@ -16,16 +13,10 @@ export const CreateAccount: React.FC<CreateAccount> = ({
     </button>
   );
 };
-interface CreateAccount {
-  isValidated: boolean;
-  createAcountHandler: (e: any) => Promise<void>;
-}
+
 // --------------------- PROFILE PICTURE-----------------------------------------------
-export const ProfilePicture: React.FC<ProfilePicture> = ({
-  profilePicture,
-  setProfilePicture,
-}) => {
-  const resizeFile = (file: any) =>
+export const ProfilePicture = ({ profilePicture, setProfilePicture }) => {
+  const resizeFile = (file) =>
     new Promise((resolve) => {
       Resizer.imageFileResizer(
         file,
@@ -43,10 +34,10 @@ export const ProfilePicture: React.FC<ProfilePicture> = ({
   useEffect(() => {
     setProfilePicture(profile);
   }, []);
-  const imageSelectHandler = async (e: any) => {
+  const imageSelectHandler = async (e) => {
     try {
       const file = e.target.files[0];
-      const image = (await resizeFile(file)) as string;
+      const image = await resizeFile(file);
       setProfilePicture(image);
     } catch (err) {
       console.error(err);
@@ -65,7 +56,3 @@ export const ProfilePicture: React.FC<ProfilePicture> = ({
     </div>
   );
 };
-interface ProfilePicture {
-  profilePicture: any;
-  setProfilePicture: (value: string) => void;
-}

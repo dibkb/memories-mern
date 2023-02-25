@@ -3,14 +3,11 @@ import { createPortal } from "react-dom";
 import styles from "../styles/Postmodal.module.scss";
 import Resizer from "../api/Resizer";
 import { BASEURL } from "../api/api";
-export const CreatePostModal: React.FC<CreatePostModal> = ({
-  setShowModal,
-  id,
-}) => {
-  const [title, setTitle] = useState<string>("");
-  const [description, setDescription] = useState<string>("");
-  const [file, setFile] = useState<any>(null);
-  const [diableButton, setDisableButton] = useState<boolean>(true);
+export const CreatePostModal = ({ setShowModal, id }) => {
+  const [title, setTitle] = useState < string > "";
+  const [description, setDescription] = useState < string > "";
+  const [file, setFile] = useState < any > null;
+  const [diableButton, setDisableButton] = useState < boolean > true;
   useEffect(() => {
     if (id) {
       fetch(`${BASEURL}/posts/${id}`, {
@@ -26,7 +23,7 @@ export const CreatePostModal: React.FC<CreatePostModal> = ({
         });
     }
   }, [id]);
-  const handleKeyDown = (e: any) => {
+  const handleKeyDown = (e) => {
     e.target.style.height = "inherit";
     if (e.target.scrollHeight < 250)
       e.target.style.height = `${e.target.scrollHeight}px`;
@@ -68,7 +65,7 @@ export const CreatePostModal: React.FC<CreatePostModal> = ({
       setDisableButton(false);
     }
   }, [title, description, file]);
-  const resizeFile = (file: any) =>
+  const resizeFile = (file) =>
     new Promise((resolve) => {
       Resizer.imageFileResizer(
         file,
@@ -83,7 +80,7 @@ export const CreatePostModal: React.FC<CreatePostModal> = ({
         "base64"
       );
     });
-  const onFileSelect = async (event: any) => {
+  const onFileSelect = async (event) => {
     try {
       const file = event.target.files[0];
       const image = await resizeFile(file);
@@ -117,9 +114,7 @@ export const CreatePostModal: React.FC<CreatePostModal> = ({
         <input
           type="text"
           placeholder="Title"
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setTitle(e.target.value)
-          }
+          onChange={(e) => setTitle(e.target.value)}
           value={title}
           className={styles["title"]}
         />
@@ -130,9 +125,7 @@ export const CreatePostModal: React.FC<CreatePostModal> = ({
           className={styles["textarea"]}
           onKeyDown={handleKeyDown}
           value={description}
-          onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
-            setDescription(e.target.value)
-          }
+          onChange={(e) => setDescription(e.target.value)}
         ></textarea>
         <div className={styles["file__input"]}>
           <input type="file" name="file" onChange={onFileSelect} />
@@ -143,7 +136,3 @@ export const CreatePostModal: React.FC<CreatePostModal> = ({
     document.body
   );
 };
-interface CreatePostModal {
-  setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
-  id?: string;
-}
