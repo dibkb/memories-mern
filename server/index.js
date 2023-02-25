@@ -9,7 +9,16 @@ import cookieParser from "cookie-parser";
 dotenv.config();
 const app = express();
 // middlewares
-app.use(cors({ credentials: true, origin: "https://memoriies.netlify.app" }));
+app.use(
+  cors({
+    credentials: true,
+    origin: [
+      "http://localhost:5173",
+      "https://memoriies.netlify.app",
+      "https://memories-mern-gray.vercel.app",
+    ],
+  })
+);
 app.use(bodyParser.urlencoded({ limit: `50mb`, extended: true }));
 app.use(cookieParser());
 app.use(express.json({ limit: "50mb" }));
