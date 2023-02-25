@@ -9,9 +9,13 @@ export const loginUser = async (req, res) => {
   try {
     const user = await UsersModel.login(email, password);
     const token = createJWT(user._id);
-    res.cookie("token", token).json({
-      user,
-    });
+    res
+      .cookie("token", token, {
+        domain: "https://memoriies.netlify.app",
+      })
+      .json({
+        user,
+      });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
