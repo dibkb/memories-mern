@@ -11,7 +11,8 @@ export const loginUser = async (req, res) => {
     const token = createJWT(user._id);
     res
       .cookie("token", token, {
-        domain: "https://memoriies.netlify.app",
+        secure: true,
+        sameSite: "None",
       })
       .json({
         user,
