@@ -2,7 +2,7 @@ import { UsersModel } from "../models/usersModel.js";
 import { PostMessage } from "../models/postMessage.js";
 import jwt from "jsonwebtoken";
 export const createJWT = (_id) => {
-  return jwt.sign({ _id }, process.env.JWT_KEY, { expiresIn: "3d" });
+  return jwt.sign({ _id }, "L41o!jneldV9yD<399/>", { expiresIn: "3d" });
 };
 export const loginUser = async (req, res) => {
   const { email, password } = req.body;
