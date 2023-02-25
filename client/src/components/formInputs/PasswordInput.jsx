@@ -1,16 +1,10 @@
 import React, { useState } from "react";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid";
 import styles from "../../styles/Form.module.scss";
-import { TextError } from "../Form Components/RegisterForm";
 import { WarningIcon } from "../../utils/Icons";
-export const PasswordInput: React.FC<PasswordInput> = ({
-  placeholder,
-  input,
-  setInput,
-  error,
-}) => {
-  const [showPw, setShowPw] = useState<boolean>(false);
-  const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+export const PasswordInput = ({ placeholder, input, setInput, error }) => {
+  const [showPw, setShowPw] = useState < boolean > false;
+  const onChangeHandler = (e) => {
     e.preventDefault;
     setInput(e.target.value);
   };
@@ -41,9 +35,3 @@ export const PasswordInput: React.FC<PasswordInput> = ({
     </div>
   );
 };
-interface PasswordInput {
-  placeholder: string;
-  input: string;
-  setInput: (value: any) => void;
-  error: TextError;
-}

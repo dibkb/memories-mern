@@ -1,14 +1,8 @@
 import React from "react";
 import styles from "../../styles/Form.module.scss";
 import { WarningIcon } from "../../utils/Icons";
-import { TextError } from "../Form Components/RegisterForm";
-export const TextInput: React.FC<TextInput> = ({
-  placeholder,
-  input,
-  setInput,
-  error,
-}) => {
-  const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+export const TextInput = ({ placeholder, input, setInput, error }) => {
+  const onChangeHandler = (e) => {
     e.preventDefault();
     setInput(e.target.value);
   };
@@ -29,9 +23,3 @@ export const TextInput: React.FC<TextInput> = ({
     </span>
   );
 };
-interface TextInput {
-  placeholder: string;
-  input: string;
-  setInput: (value: any) => void;
-  error: TextError;
-}
