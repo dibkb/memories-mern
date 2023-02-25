@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "../styles/Utils.module.scss";
 import { Link } from "react-router-dom";
-const CreateAccount: React.FC = () => {
+const CreateAccount = () => {
   return (
     <div className={styles["create-account"]}>
       <Link to="/register">
