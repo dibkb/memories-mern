@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "../../styles/components.module.scss";
 import profile from "../../assets/profile.svg";
-import Resizer from "react-image-file-resizer";
+import Resizer from "../../api/Resizer";
 export const CreateAccount: React.FC<CreateAccount> = ({
   isValidated,
   createAcountHandler,

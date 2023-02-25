@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import styles from "../styles/Postmodal.module.scss";
-import Resizer from "react-image-file-resizer";
+import Resizer from "../api/Resizer";
 import { BASEURL } from "../api/api";
 export const CreatePostModal: React.FC<CreatePostModal> = ({
   setShowModal,

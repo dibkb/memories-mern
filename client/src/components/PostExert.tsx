@@ -72,7 +72,6 @@ const PostExert: React.FC<PostExert> = ({ post, isAdmin }) => {
     </div>
   );
 };
-
 export default PostExert;
 interface PostExert {
   post: any;
